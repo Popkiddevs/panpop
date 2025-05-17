@@ -3,348 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popkid's Digital Hub</title>
-    <style>
-        /* Global Styles */
-        :root {
-            --primary-bg: #1e1e1e;
-            --secondary-bg: #2c2c2c;
-            --text-primary: #f0f0f0;
-            --accent-color: #64b5f6;
-            --whatsapp-green: #25D366;
-            --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            --border-radius: 8px;
-            --transition-duration: 0.3s;
-            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            font-family: var(--font-family);
-            margin: 0;
-            background-color: var(--primary-bg);
-            color: var(--text-primary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding-top: 70px; /* Space for fixed header */
-            transition: background-color var(--transition-duration) ease;
-        }
-
-        /* Header */
-        .main-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--secondary-bg);
-            color: var(--text-primary);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            box-shadow: var(--box-shadow);
-        }
-
-        .social-links-container {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .social-icon-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px; /* Adjust size as needed */
-            height: 36px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1); /* Subtle background */
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 20px; /* Adjust icon size */
-            transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease, transform 0.2s ease-in-out;
-        }
-
-        .social-icon-link:hover {
-            background-color: var(--accent-color);
-            color: var(--secondary-bg);
-            transform: scale(1.1);
-        }
-
-        /* Styling for specific icons */
-        .fa-whatsapp {
-            color: #25D366; /* Official WhatsApp Green */
-            font-size: 1.3em; /* Slightly larger */
-        }
-
-        .fa-instagram {
-            /* Instagram's gradient can be complex, let's use a solid vibrant color */
-            color: #e4405f; /* A strong pink/red from their palette */
-            font-size: 1.3em;
-        }
-
-        .fa-facebook-f {
-            color: #3b5998; /* Official Facebook Blue */
-            font-size: 1.3em;
-        }
-
-        /* Refined TikTok Styling */
-        .tiktok-icon-wrapper {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: #000; /* TikTok's dark background */
-        }
-
-        .tiktok-icon {
-            /* TikTok's layered logo - using text with specific styling */
-            position: relative;
-            width: 20px;
-            height: 20px;
-        }
-
-        .tiktok-icon::before,
-        .tiktok-icon::after {
-            content: 't';
-            font-family: 'sans-serif';
-            font-weight: bold;
-            font-size: 1.5em;
-            position: absolute;
-            top: -1px;
-        }
-
-        .tiktok-icon::before {
-            color: #fe2c55; /* Reddish color */
-            left: -2px;
-        }
-
-        .tiktok-icon::after {
-            color: #00f2ea; /* Cyan color */
-            right: -2px;
-        }
-
-        .whatsapp-channel-button {
-            background-color: var(--whatsapp-green);
-            color: var(--text-primary);
-            border: none;
-            padding: 10px 15px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 16px;
-            transition: background-color var(--transition-duration) ease;
-        }
-
-        .whatsapp-channel-button:hover {
-            background-color: #128C7E;
-        }
-
-        /* Main Content */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            width: 85%;
-            max-width: 1000px;
-            margin-top: 30px;
-        }
-
-        .info-box {
-            background-color: var(--secondary-bg);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            margin-bottom: 20px;
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .info-box:hover {
-            transform: translateY(-5px);
-        }
-
-        .info-box h2 {
-            color: var(--accent-color);
-            margin-top: 0;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 8px;
-        }
-
-        .info-box p, .info-box a {
-            color: var(--text-primary);
-            line-height: 1.7;
-            text-decoration: none;
-            transition: color var(--transition-duration) ease;
-        }
-
-        .info-box a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Pages Container */
-        .pages-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            margin-top: 30px;
-        }
-
-        .page-section {
-            display: none;
-            width: 85%;
-            max-width: 1000px;
-            gap: 25px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            flex-direction: column; /* Stack info boxes on the main page */
-        }
-
-        .page-section.active {
-            display: flex;
-        }
-
-        /* Friend Card Styles */
-        .friend-card {
-            background-color: var(--secondary-bg);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            width: calc(33% - 20px);
-            min-width: 250px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .friend-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .friend-avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-            border: 2px solid var(--success-color);
-        }
-
-        .friend-name {
-            color: var(--success-color);
-            margin-top: 0;
-            margin-bottom: 8px;
-            font-size: 1.1em;
-            font-weight: bold;
-        }
-
-        /* Navigation Button */
-        .page-navigation-button {
-            background-color: var(--accent-color);
-            color: var(--text-primary);
-            border: none;
-            padding: 12px 25px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 30px;
-            transition: background-color var(--transition-duration) ease;
-        }
-
-        .page-navigation-button:hover {
-            background-color: #4a90e2;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .friend-card {
-                width: calc(50% - 15px);
-            }
-        }
-
-        @media (max-width: 576px) {
-            .friend-card {
-                width: 100%;
-            }
-            .main-content, .page-section {
-                width: 95%;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQmQa7TBCLF9vYg0jA3Q+DvwjMxjyKiZdq9+cGO3/glEqWoJWHD5axLDqc0jnhMAVPzkgjLxnF1Kdg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Popkid's Digital Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header class="main-header">
-        <div class="social-links-container">
-            <a href="https://wa.me/qr/X27A72Q4KPHKC1" target="_blank" rel="noopener noreferrer" class="social-icon-link">
-                <i class="fab fa-whatsapp"></i>
+        <nav class="header-nav">
+            <ul class="social-links">
+                <li class="social-item">
+                    <a href="https://wa.me/qr/X27A72Q4KPHKC1" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </li>
+                <li class="social-item">
+                    <a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+                        <svg viewBox="0 0 48 48" class="tiktok-icon">
+                            <path d="M41 6c-4.4 0-8 3.6-8 8v26c0 4.4 3.6 8 8 8s8-3.6 8-8V14c0-4.4-3.6-8-8-8zM7 6c-4.4 0-8 3.6-8 8v26c0 4.4 3.6 8 8 8s8-3.6 8-8V14c0-4.4-3.6-8-8-8zM24 14c0-2.2-1.8-4-4-4s-4 1.8-4 4 1.8 4 4 4 4-1.8 4-4zm16 0c0-2.2-1.8-4-4-4s-4 1.8-4 4 1.8 4 4 4 4-1.8 4-4zM24 34c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"></path>
+                        </svg>
+                    </a>
+                </li>
+                <li class="social-item">
+                    <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </li>
+                <li class="social-item">
+                    <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </li>
+            </ul>
+            <a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank" rel="noopener noreferrer" class="whatsapp-channel-button">
+                Follow WhatsApp Channel
             </a>
-            <a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank" rel="noopener noreferrer" class="social-icon-link">
-                <div class="tiktok-icon-wrapper">
-                    <div class="tiktok-icon"></div>
-                </div>
-            </a>
-            <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" rel="noopener noreferrer" class="social-icon-link">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" rel="noopener noreferrer" class="social-icon-link">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-        </div>
-        <a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank" rel="noopener noreferrer" class="whatsapp-channel-button">Follow WhatsApp Channel</a>
+        </nav>
     </header>
 
     <main class="main-content">
-        <section class="page-section active" id="page1">
+        <section class="page-section active" id="about">
+            <h2 class="section-title">About Me</h2>
             <div class="info-box">
-                <h2>About Me</h2>
                 <p>Hello there! I'm Popkid, a passionate individual with a keen interest in technology and its ever-evolving landscape. I enjoy exploring new coding concepts, building innovative projects, and connecting with like-minded people in the digital space.</p>
                 <p>My journey in the tech world is driven by a desire to learn, create, and contribute to exciting developments. Whether it's diving into the intricacies of software development or exploring the creative potential of web design, I'm always eager to expand my horizons.</p>
             </div>
+        </section>
 
+        <section class="page-section" id="contact">
+            <h2 class="section-title">How to Reach Me</h2>
             <div class="info-box">
-                <h2>How to Reach Me</h2>
                 <p>I'm always open to connecting and collaborating. Here are a few ways you can get in touch:</p>
-                <ul>
-                    <li><strong>WhatsApp:</strong> <a href="https://wa.me/qr/X27A72Q4KPHKC1" target="_blank" rel="noopener noreferrer">Chat with me on WhatsApp</a></li>
-                    <li><strong>Instagram:</strong> <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" rel="noopener noreferrer">Follow me on Instagram</a></li>
-                    <li><strong>Facebook:</strong> <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" rel="noopener noreferrer">Connect with me on Facebook</a></li>
-                    <li><strong>GitHub:</strong> <a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank" rel="noopener noreferrer">Explore my projects on GitHub</a></li>
+                <ul class="contact-list">
+                    <li class="contact-item">
+                        <strong>WhatsApp:</strong>
+                        <a href="https://wa.me/qr/X27A72Q4KPHKC1" target="_blank" rel="noopener noreferrer">Chat with me on WhatsApp</a>
+                    </li>
+                    <li class="contact-item">
+                        <strong>Instagram:</strong>
+                        <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" rel="noopener noreferrer">Follow me on Instagram</a>
+                    </li>
+                    <li class="contact-item">
+                        <strong>Facebook:</strong>
+                        <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" rel="noopener noreferrer">Connect with me on Facebook</a>
+                    </li>
+                    <li class="contact-item">
+                        <strong>GitHub:</strong>
+                        <a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank" rel="noopener noreferrer">Explore my projects on GitHub</a>
+                    </li>
                 </ul>
                 <p>Feel free to reach out if you have any questions, collaboration ideas, or just want to say hello!</p>
             </div>
-
-            <div class="info-box">
-                <h2>My GitHub Repository</h2>
-                <p>Check out my latest projects and contributions on GitHub:</p>
-                <p><a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank" rel="noopener noreferrer"><strong>POPKID-XTECH Repository <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="inline-icon"><path d="M12 4a8 8 0 0 1 8 8 8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8m0 2a6 6 0 0 0-6 6 6 6 0 0 0 6 6 6 6 0 0 0 6-6 6 6 0 0 0-6-6m5 13.5v-2h-2v2h2m-6-2v-4h2v4h-2m-4-1.5v-2h2v2h-2m8.5-1.5v-2h2v2h-2m-6-2v-2h2v2h-2m-4-1.5v-2h2v2h-2M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10 10 10 0 0 0-10-10z"/></svg></strong></a></p>
-            </div>
         </section>
 
-        <section class="page-section" id="page2">
-            <h2>My Network</h2>
-            <p style="text-align: center; color: var(--text-primary);">These are some of the brilliant minds I've had the pleasure of connecting with.</p>
-            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px;">
-                <div class="friend-card">
-                    <img src="https://via.placeholder.com/100/aed581/fff?Text=CM" alt="CodeMaster" class="friend-avatar">
-                    <h3 class="friend-name">CodeMaster</h3>
-                    <p style="color: var(--text-primary);">A fellow enthusiast in the world of algorithms and problem-solving.</p>
-                </div>
-                <div class="friend-card">
-                    <img src="https://via.placeholder.com/100/f48fb1/fff?Text=PP" alt="PixelPioneer" class="friend-avatar">
-                    <h3 class="friend-name">PixelPioneer</h3>
-                    <p style="color: var(--text-primary);">Passionate about UI/UX design and creating visually stunning interfaces.</p>
-                </div>
-                <div class="friend-card">
-                    <img src="https://via.placeholder.com/100/64b5f6/fff?Text=DN" alt="DataNinja" class="friend-avatar">
-                    <h3 class="friend-name">DataNinja</h3>
-                    <p style="color: var(--text-
+        <section class="page-section" id="github">
+            <h2 class="section-title">My GitHub Repository</h2>
+            <div class="info-box">
+                <p>Check out my latest projects and contributions on GitHub:</p>
+                <p>
+                    <a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank" rel="noopener noreferrer" class="github-link">
+                        <strong>POPKID-XTECH Repository <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="inline-icon"><path d="M12 4a8 8 0 0 1 8 8 8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8m0 2a6 6 0 0 0-6 6 6 6 0 0 0 6 6 6 6 0 0 0 6-6 6 6 0 0 0-6-6m5 13.5v-2h-2v2h2m-6-2v-4h2v4h-2m-4-1.5v-2h2v2h-2m8.5-1.5v-2h2v2h-2m-6-2v-2h2v2h-2m-4-1.5v-2h2v2h-2M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10 10 10 0 0 0-10-10z"/></svg></strong>
+                    </a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div class="pages-container">
+        <button class="page-navigation-button" data-target="contact">Contact Me</button>
+        <button class="page-navigation-button" data-target="github">GitHub</button>
+        <button class="page-navigation-button" data-target="friends">My Network</button>
+    </div>
+
+    <section class="page-section" id="friends">
+        <h2 class="section-title">My Network</h2>
+        <p class="section-description">These are some of the brilliant minds I've had the pleasure of connecting with.</p>
+        <div class="friends-grid">
+            <div class="friend-card">
+                <img src="https://via.placeholder.com/100/aed581/fff?Text=CM" alt="CodeMaster" class="friend-avatar">
+                <h3 class="friend-name">CodeMaster</h3>
+                <p class="friend-description">A fellow enthusiast in the world of algorithms and problem-solving.</p>
+            </div>
+            <div class="friend-card">
+                <img src="https://via.placeholder.com/100/f48fb1/fff?Text=PP" alt="PixelPioneer" class="friend-avatar">
+                <h3 class="friend-name">PixelPioneer</h3>
+                <p class="friend-description">Passionate about UI/UX design and creating visually stunning interfaces.</p>
+            </div>
+            <div class="friend-card">
+                <img src="https://via.placeholder.com/100/64b5f6/fff?Text=DN" alt="DataNinja" class="friend-avatar">
+                <h3 class="friend-name">DataNinja</h3>
+                <p class="friend-description">Exploring the power of data and extracting meaningful insights.</p>
+            </div>
+            <div class="friend-card">
+                <img src="https://via.placeholder.com/100/ffb74d/fff?Text=WW" alt="WebWiz" class="friend-avatar">
+                <h3 class="friend-name">WebWiz</h3>
+                <p class="friend-description">Crafting seamless web experiences and pushing the boundaries of front-end development.</p>
+            </div>
+            <div class="friend-card">
+                <img src="https://via.placeholder.com/100/9575cd/fff?Text=AN" alt="AlgoAce" class="friend-avatar">
+                <h3 class="friend-name">AlgoAce</h3>
+                <p class="friend-description">Deeply immersed in the world of algorithms and data structures.</p>
+            </div>
+            <div class="friend-card">
+                <img src="https://via.placeholder.com/100/4dd0e1/fff?Text=MobDev" alt="MobileMaestro" class="friend-avatar">
+                <h3 class="friend-name">MobileMaestro</h3>
+                <p class="friend-description">Building innovative and user-friendly mobile applications.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const pageSections = document.querySelectorAll('.page-section');
+            const navButtons = document.querySelectorAll('.page-navigation-button');
+            const friendsSection = document.getElementById('friends');
+
+            function showSection(id) {
+                pageSections.forEach(section => section.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
+
+                // Hide or show friends section based on the button clicked
+                if (id === 'friends') {
+                    friendsSection.style.display = 'block';
+                } else {
+                    friendsSection.style.display = 'none';
+                }
+            }
+
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const target = this.dataset.target;
+                    showSection(target);
+                });
+            });
+
+            // Initially show the "About Me" section and hide "Friends"
+            showSection('about');
+            friendsSection.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
