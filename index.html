@@ -111,7 +111,7 @@
     .social-box img {
       width: 80px;
       height: 80px;
-      border-radius: 50%;
+      border-radius: 0;
       object-fit: cover;
       margin-bottom: 10px;
     }
@@ -147,22 +147,22 @@
         <p>Welcome to my tech space! Here you'll find cool projects, bots, and developer tools I'm working on.</p>
       </div>
       <div class="social-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp" style="border-radius: 0;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp" style="border-radius: 0; width: 80px; height: 80px;">
         <p>Chat with me directly on WhatsApp for quick questions or collaborations.</p>
         <button onclick="window.open('https://wa.me/qr/X27A72Q4KPHKC1', '_blank')">WhatsApp</button>
       </div>
       <div class="social-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/TikTok_logo.svg/2048px-TikTok_logo.svg.png" alt="TikTok" style="border-radius: 0;">
+        <img src="https://img.icons8.com/?size=100&id=hf1tCYT3bFBL&format=png&color=000000" alt="TikTok" style="border-radius: 0; width: 80px; height: 80px;">
         <p>Catch my latest tech snippets and creative content on TikTok!</p>
         <button onclick="window.open('https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1', '_blank')">TikTok</button>
       </div>
       <div class="social-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" alt="Instagram" style="border-radius: 0;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1395px-Instagram_logo_2016.svg.png" alt="Instagram" style="border-radius: 0; width: 80px; height: 80px;">
         <p>Follow me on Instagram for behind-the-scenes glimpses and more!</p>
         <button onclick="window.open('https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==', '_blank')">Instagram</button>
       </div>
       <div class="social-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook" style="border-radius: 0;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook" style="border-radius: 0; width: 80px; height: 80px;">
         <p>Connect with me on Facebook for updates and broader discussions.</p>
         <button onclick="window.open('https://www.facebook.com/profile.php?id=100083684483339', '_blank')">Facebook</button>
       </div>
@@ -386,65 +386,3 @@
             options: {
               responsive: true,
               plugins: {
-                legend: { labels: { color: '#fff' } },
-              },
-            },
-          });
-        });
-
-      // Commit activity - last 7 days
-      fetch('https://api.github.com/users/Popkiddevs/events')
-        .then((res) => res.json())
-        .then((events) => {
-          const commitsPerDay = Array(7).fill(0);
-          const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-          events.forEach((event) => {
-            if (event.type === 'PushEvent') {
-              const day = new Date(event.created_at).getDay();
-              commitsPerDay[day] += event.payload.commits.length;
-            }
-          });
-
-          const commitCtx = document
-            .getElementById('commitChart')
-            .getContext('2d');
-          new Chart(commitCtx, {
-            type: 'bar',
-            data: {
-              labels: days,
-              datasets: [
-                {
-                  label: 'Commits This Week',
-                  data: commitsPerDay,
-                  backgroundColor: '#00FFAB',
-                },
-              ],
-            },
-            options: {
-              responsive: true,
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  ticks: { color: '#fff' },
-                },
-                x: {
-                  ticks: { color: '#fff' },
-                },
-              },
-              plugins: {
-                legend: { labels: { color: '#fff' } },
-              },
-            },
-          });
-        })
-        .catch((err) => {
-          console.error('Error loading commit data:', err);
-        });
-    }
-
-    // Call showPage1 to display the first page after the content is loaded
-    showPage1();
-  </script>
-</body>
-</html>
