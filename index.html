@@ -1,384 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popkid's Universe</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            background: linear-gradient(135deg, #1c1c1c, #2e2e2e);
-            color: #f0f0f0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 30px;
-            min-height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>POPKID XTECH</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
 
-        .top-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(30, 30, 30, 0.9);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
+    .container {
+      padding: 20px;
+      max-width: 960px;
+      margin: auto;
+    }
 
-        .left-menu {
-            display: flex;
-            align-items: center;
-        }
+    h1 {
+      color: #00FFAB;
+      text-align: center;
+    }
 
-        .menu-toggle {
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            margin-right: 20px;
-            transition: transform 0.3s ease;
-        }
+    .friends-page {
+      display: none;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
 
-        .menu-toggle.open {
-            transform: rotate(90deg);
-        }
+    .friend-box {
+      background: #1f1f1f;
+      border: 1px solid #333;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 260px;
+    }
 
-        .bar {
-            width: 28px;
-            height: 3px;
-            background-color: #64ffda;
-            margin: 4px 0;
-            border-radius: 2px;
-            transition: background-color 0.3s ease;
-        }
+    .friend-box img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
 
-        .menu-toggle.open .bar {
-            background-color: #a7ffe3;
-        }
+    .page-navigation {
+      text-align: center;
+      margin-top: 20px;
+    }
 
-        .whatsapp-channel-container {
-            display: none; /* Initially hidden */
-        }
+    .page-navigation button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      background-color: #00FFAB;
+      color: #121212;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-        .whatsapp-channel-container.open {
-            display: block;
-        }
+    .page-navigation button:hover {
+      background-color: #00cc8f;
+    }
 
-        .social-link-top {
-            color: #e0e0e0;
-            text-decoration: none;
-            margin-right: 20px;
-            display: flex;
-            align-items: center;
-            transition: color 0.3s ease;
-        }
-
-        .social-link-top:hover {
-            color: #64ffda;
-        }
-
-        .social-icon {
-            margin-right: 5px;
-            font-size: 1.3em;
-            font-weight: bold;
-            -webkit-text-fill-color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            background-size: 200% 100%;
-            animation: shine 2s linear infinite;
-        }
-
-        @keyframes shine {
-            to {
-                background-position: 200% 0;
-            }
-        }
-
-        .tiktok-icon {
-            background-image: linear-gradient(90deg, #69C9D0, #EE1D52, #000000);
-        }
-
-        .instagram-icon {
-            background-image: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
-            border-radius: 5px; /* Simulate camera lens */
-            padding: 2px;
-        }
-
-        .facebook-icon {
-            color: #1877F2;
-            -webkit-text-fill-color: #1877F2;
-            background-image: none;
-        }
-
-        .whatsapp-button {
-            background-color: #25D366;
-            color: #f0f0f0;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            margin-left: auto;
-            animation: pulse 1.5s infinite alternate;
-        }
-
-        @keyframes pulse {
-            from {
-                transform: scale(1);
-                opacity: 0.8;
-            }
-            to {
-                transform: scale(1.05);
-                opacity: 1;
-            }
-        }
-
-        .whatsapp-button:hover {
-            background-color: #128C7E;
-            transform: scale(1.08);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        .info-container {
-            margin-top: 100px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            width: 90%;
-            max-width: 1200px;
-            padding: 20px;
-        }
-
-        .tech-box {
-            background: linear-gradient(145deg, #1e1e1e, #282828);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 6px 6px 12px #1a1a1a, -6px -6px 12px #303030;
-            width: calc(33% - 25px);
-            min-width: 320px;
-            text-align: center;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-
-        .tech-box:hover {
-            transform: translateY(-8px);
-            box-shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #303030;
-        }
-
-        .tech-box h2 {
-            color: #64ffda;
-            margin-bottom: 15px;
-            font-size: 1.8em;
-        }
-
-        .tech-box p, .tech-box a {
-            color: #e0e0e0;
-            text-decoration: none;
-            line-height: 1.6;
-        }
-
-        .tech-box a:hover {
-            color: #a7ffe3;
-        }
-
-        .page-navigation {
-            margin-top: 40px;
-            display: flex;
-            gap: 20px;
-        }
-
-        .next-button, .prev-button {
-            background-color: #64ffda;
-            color: #121212;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .next-button:hover, .prev-button:hover {
-            background-color: #a7ffe3;
-            transform: scale(1.08);
-        }
-
-        .friends-page {
-            display: none;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            width: 90%;
-            max-width: 1200px;
-            margin-top: 100px;
-            padding: 20px;
-        }
-
-        .friend-box {
-            background: linear-gradient(145deg, #1e1e1e, #282828);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 6px 6px 12px #1a1a1a, -6px -6px 12px #303030;
-            width: calc(33% - 25px);
-            min-width: 280px;
-            text-align: center;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-
-        .friend-box:hover {
-            transform: translateY(-8px);
-            box-shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #303030;
-        }
-
-        .friend-box img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .friend-box h3 {
-            color: #f0f0f0;
-            margin-bottom: 10px;
-            font-size: 1.4em;
-        }
-
-        /* Keyframe Animation */
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-    </style>
+    canvas {
+      margin-top: 20px;
+      background: #fff;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
-    <div class="top-bar">
-        <div class="left-menu">
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-        </div>
-        <a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank" class="social-link-top">
-            <span class="social-icon tiktok-icon">TikTok</span>
-        </a>
-        <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" class="social-link-top">
-            <span class="social-icon instagram-icon">Instagram</span>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" class="social-link-top">
-            <span class="social-icon facebook-icon">Facebook</span>
-        </a>
-        <div class="whatsapp-channel-container">
-            <a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank" class="whatsapp-button">Follow WhatsApp Channel</a>
-        </div>
+  <div class="container">
+    <h1>Welcome to POPKID XTECH</h1>
+
+    <!-- Page 1 -->
+    <div class="friends-page" id="page1" style="display: flex;">
+      <div class="friend-box">
+        <img src="https://via.placeholder.com/120/2196F3/FFFFFF?Text=You" alt="Your Avatar">
+        <h3>POPKID</h3>
+        <p>Welcome to my tech space! Here you'll find cool projects, bots, and developer tools I'm working on.</p>
+      </div>
     </div>
 
-    <div class="info-container" id="page1">
-        <div class="tech-box">
-            <h2>About Me</h2>
-            <p>Passionate about technology and innovation.</p>
-            <p>Exploring the world of web development and beyond.</p>
-        </div>
-
-        <div class="tech-box">
-            <h2>My GitHub</h2>
-            <p><a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank">POPKID-XTECH</a></p>
-            <p>Check out my coding projects and contributions.</p>
-        </div>
-
-        <div class="tech-box">
-            <h2>My Interests</h2>
-            <p>Web Development (Frontend & Backend)</p>
-            <p>Mobile App Development</p>
-            <p>Exploring new technologies and frameworks.</p>
-        </div>
-
-        <div class="tech-box">
-            <h2>Contact</h2>
-            <p>Feel free to reach out!</p>
-            <p>Connect with me via the social links above.</p>
-        </div>
-    </div>
-
+    <!-- Page 2 -->
     <div class="friends-page" id="page2">
+      <!-- Filled dynamically -->
     </div>
 
+    <!-- Page 3 -->
+    <div class="friends-page" id="page3">
+      <div class="friend-box" style="width: 100%;">
+        <h3>Education Journey</h3>
+        <p><strong>Primary:</strong> Completed</p>
+        <p><strong>High School:</strong> Completed</p>
+        <p><strong>University:</strong><br>Currently studying at<br><em>Masinde Muliro University of Science and Technology</em></p>
+        <p><strong>Field:</strong> Technology & Innovation</p>
+        <canvas id="eduChart" width="400" height="300"></canvas>
+      </div>
+    </div>
+
+    <!-- Page Navigation -->
     <div class="page-navigation">
-        <button class="next-button" onclick="showPage2()">Next</button>
-        <button class="prev-button" onclick="showPage1()" style="display: none;" id="prevButton">Previous</button>
+      <button class="prev-button" onclick="showPage1()" id="prevButton" style="display: none;">Previous</button>
+      <button class="next-button" onclick="showPage2()" id="nextButton">Next</button>
+      <button class="next-button" onclick="showPage3()" id="thirdButton" style="display: none;">Next</button>
     </div>
+  </div>
 
-    <script>
-        function toggleMenu() {
-            const toggle = document.querySelector('.menu-toggle');
-            const whatsappContainer = document.querySelector('.whatsapp-channel-container');
-            toggle.classList.toggle('open');
-            whatsappContainer.classList.toggle('open');
+  <script>
+    function showPage1() {
+      document.getElementById('page1').style.display = 'flex';
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page3').style.display = 'none';
+      document.getElementById('prevButton').style.display = 'none';
+      document.getElementById('nextButton').style.display = 'inline-block';
+      document.getElementById('thirdButton').style.display = 'none';
+    }
+
+    function showPage2() {
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'flex';
+      document.getElementById('page3').style.display = 'none';
+      document.getElementById('prevButton').onclick = showPage1;
+      document.getElementById('prevButton').style.display = 'inline-block';
+      document.getElementById('nextButton').style.display = 'none';
+      document.getElementById('thirdButton').style.display = 'inline-block';
+
+      const friendsContainer = document.getElementById('page2');
+      friendsContainer.innerHTML = `
+        <div class="friend-box">
+          <img src="https://via.placeholder.com/120/FFC107/FFFFFF?Text=Friend1" alt="Friend 1">
+          <h3>Awesome Coder</h3>
+        </div>
+        <div class="friend-box">
+          <img src="https://via.placeholder.com/120/4CAF50/FFFFFF?Text=TechGuru" alt="Tech Guru">
+          <h3>Tech Enthusiast</h3>
+        </div>
+        <div class="friend-box">
+          <img src="https://via.placeholder.com/120/2196F3/FFFFFF?Text=WebMaster" alt="Web Master">
+          <h3>Web Dev Pro</h3>
+        </div>
+        <div class="friend-box">
+          <img src="https://via.placeholder.com/120/9C27B0/FFFFFF?Text=DataKing" alt="Data King">
+          <h3>Data Wiz</h3>
+        </div>
+        <div class="friend-box">
+          <img src="https://via.placeholder.com/120/FF9800/FFFFFF?Text=DesignPro" alt="Design Pro">
+          <h3>UI/UX Master</h3>
+        </div>
+        <div class="friend-box">
+          <img src="https://via.placeholder.com/120/607D8B/FFFFFF?Text=CloudAce" alt="Cloud Ace">
+          <h3>Cloud Expert</h3>
+        </div>
+      `;
+    }
+
+    function showPage3() {
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page3').style.display = 'flex';
+      document.getElementById('prevButton').onclick = showPage2;
+      document.getElementById('prevButton').style.display = 'inline-block';
+      document.getElementById('nextButton').style.display = 'none';
+      document.getElementById('thirdButton').style.display = 'none';
+
+      // Draw chart only once
+      if (!window.chartDrawn) {
+        drawChart();
+        window.chartDrawn = true;
+      }
+    }
+
+    function drawChart() {
+      const ctx = document.getElementById('eduChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Primary School', 'High School', 'University'],
+          datasets: [{
+            label: 'Years of Education',
+            data: [8, 4, 2], // Example: 8 years primary, 4 high school, 2 university so far
+            backgroundColor: ['#4CAF50', '#2196F3', '#FF5722']
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: '#000'
+              }
+            },
+            x: {
+              ticks: {
+                color: '#000'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: '#000'
+              }
+            },
+            tooltip: {
+              backgroundColor: '#333',
+              titleColor: '#fff',
+              bodyColor: '#fff'
+            }
+          }
         }
-
-        function showPage1() {
-            document.getElementById('page1').style.display = 'flex';
-            document.getElementById('page2').style.display = 'none';
-            document.querySelector('.page-navigation').style.display = 'flex';
-            document.getElementById('prevButton').style.display = 'none';
-            document.querySelector('.next-button').style.display = 'inline-block';
-        }
-
-        function showPage2() {
-            document.getElementById('page1').style.display = 'none';
-            document.getElementById('page2').style.display = 'flex';
-            document.querySelector('.page-navigation').style.display = 'flex';
-            document.getElementById('prevButton').style.display = 'inline-block';
-            document.querySelector('.next-button').style.display = 'none';
-
-            const friendsContainer = document.getElementById('page2');
-            friendsContainer.innerHTML = `
-                <div class="friend-box">
-                    <img src="https://via.placeholder.com/120/FFC107/FFFFFF?Text=Friend1" alt="Friend 1">
-                    <h3>Awesome Coder</h3>
-                </div>
-                <div class="friend-box">
-                    <img src="https://via.placeholder.com/120/4CAF50/FFFFFF?Text=TechGuru" alt="Tech Guru">
-                    <h3>Tech Enthusiast</h3>
-                </div>
-                <div class="friend-box">
-                    <img src="https://via.placeholder.com/120/2196F3/FFFFFF?Text=WebMaster" alt="Web Master">
-                    <h3>Web Development Pro</h3>
-                </div>
-                <div class="friend-box">
-                    <img src="https://via.placeholder.com/120/9C27B0/FFFFFF?Text=DataKing" alt="Data King">
-                    <h3>Data Science Wiz</h3>
-                </div>
-                <div class="friend-box">
-                    <img src="https://via.placeholder.com/120/FF9800/FFFFFF?Text=DesignPro" alt="Design Pro">
-                    <h3>UI/UX Master</h3>
-                </div>
-                <div class="friend-box">
-                    <img src="https://via.placeholder.com/120/607D8B/FFFFFF?Text=CloudAce" alt="Cloud Ace">
-                    <h3>Cloud Computing Expert</h3>
-                </div>
-            `;
-        }
-    </script>
+      });
+    }
+  </script>
 </body>
 </html>
-
