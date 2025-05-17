@@ -6,6 +6,57 @@
     <title>Popkid - Dynamic Developer Showcase</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Inline styles for the friends page for now, will move to style.css later */
+        .friends-page {
+            position: fixed;
+            top: 0;
+            right: -100%; /* Initially off-screen */
+            width: 100%;
+            height: 100%;
+            background-color: #232e3c;
+            color: #f8f8f2;
+            z-index: 30;
+            padding: 80px 30px 50px;
+            transition: transform 0.3s ease-in-out;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .friends-page.show {
+            transform: translateX(-100%); /* Slide into view */
+        }
+
+        .friend-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .friend-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #303c49;
+        }
+
+        .friend-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .friends-page h2 {
+            color: #64ffda;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <header class="top-links">
@@ -21,7 +72,7 @@
         </div>
     </header>
 
-    <main class="main-content">
+    <main class="main-content" id="mainContent">
         <section id="about">
             <h1>Hello, I'm Popkid</h1>
             <p class="lead animated-box" data-animation="slide-up">An aspiring developer from Kenya with a passion for building innovative digital solutions and exploring the ever-evolving world of technology.</p>
@@ -57,9 +108,31 @@
 
         <section id="contact" class="animated-box" data-animation="slide-down">
             <h2>Get In Touch</h2>
-            <p>I'm always open to new opportunities and collaborations. You can connect with me through the social links at the top of the page or send me a direct message on whatsapp +254732297194.</p>
+            <p>I'm always open to new opportunities and collaborations. You can connect with me through the social links at the top of the page or send me a direct message on [Your Preferred Contact Platform].</p>
             </section>
     </main>
+
+    <div class="friends-page" id="friendsPage">
+        <h2>My Friends</h2>
+        <div class="friend-list">
+            <div class="friend-item">
+                <img src="https://www.pinterest.com/ideas/friendship-profile-pictures/931226047278/" alt="Friend 1">
+                <span>Friend 1 Name</span>
+            </div>
+            <div class="friend-item">
+                <img src="https://www.pinterest.com/hiimcurlyfry/2-people-matching-pfp/" alt="Friend 2">
+                <span>Friend 2 Name</span>
+            </div>
+            <div class="friend-item">
+                <img src="https://www.pinterest.com/ideas/profile-picture-for-3-best-friends/902664659053/" alt="Friend 3">
+                <span>Friend 3 Name</span>
+            </div>
+            <div class="friend-item">
+                <img src="https://www.pinterest.com/koshine122001/4-bff-pfp/" alt="Friend 4">
+                <span>Friend 4 Name</span>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2025 Popkid. All rights reserved.</p>
@@ -67,16 +140,40 @@
 
     <script>
         const animatedBoxes = document.querySelectorAll('.animated-box');
+        const mainContent = document.getElementById('mainContent');
+        const friendsPage = document.getElementById('friendsPage');
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function handleSwipe() {
+            if (touchStartX - touchEndX > 50) { // Left swipe
+                friendsPage.classList.add('show');
+            } else if (touchEndX - touchStartX > 50) { // Right swipe (optional: to close)
+                friendsPage.classList.remove('show');
+            }
+            touchStartX = 0;
+            touchEndX = 0;
+        }
+
+        mainContent.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].clientX;
+        }, false);
+
+        mainContent.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].clientX;
+            handleSwipe();
+        }, false);
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('in-view');
-                    observer.unobserve(entry.target); // Stop observing once animated
+                    observer.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.1 // Trigger animation when 10% of the element is visible
+            threshold: 0.1
         });
 
         animatedBoxes.forEach(box => {
@@ -84,7 +181,7 @@
             const animation = box.dataset.animation;
             const delay = box.dataset.delay || '0s';
             box.style.animationDelay = delay;
-            box.classList.add(animation); // Add initial animation class for setup
+            box.classList.add(animation);
         });
     </script>
 </body>
