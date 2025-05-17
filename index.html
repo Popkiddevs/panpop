@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popkid's Digital Space</title>
+    <title>Popkid's Digital Hub</title>
     <style>
-        /* Global Styles */
+        /* Global Styles (same as before) */
         :root {
             --primary-bg: #1e1e1e;
             --secondary-bg: #2c2c2c;
@@ -31,7 +31,7 @@
             transition: background-color var(--transition-duration) ease;
         }
 
-        /* Header */
+        /* Header (same as before) */
         .main-header {
             position: fixed;
             top: 0;
@@ -54,19 +54,33 @@
         }
 
         .social-icon-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
             color: var(--text-primary);
             text-decoration: none;
-            font-size: 20px; /* Adjust size as needed */
-            transition: color var(--transition-duration) ease;
+            font-size: 20px;
+            transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease, transform 0.2s ease-in-out;
         }
 
         .social-icon-link:hover {
-            color: var(--accent-color);
+            background-color: var(--accent-color);
+            color: var(--secondary-bg);
+            transform: scale(1.1);
         }
 
-        /* You might want to use actual icons (e.g., from a font library like Font Awesome) for a more visual appeal. For now, we'll use text. */
-        .social-icon {
-            /* Style for the icon if you use one */
+        /* Icons (same as before, ensure Font Awesome is linked) */
+        .fa-whatsapp { color: #25D366; }
+        .fa-instagram { color: #e4405f; }
+        .fa-facebook-f { color: #3b5998; }
+
+        /* TikTok SVG Icon (inline for simplicity) */
+        .tiktok-icon {
+            /* Style the SVG directly if needed */
         }
 
         .whatsapp-channel-button {
@@ -85,7 +99,7 @@
             background-color: #128C7E;
         }
 
-        /* Main Content */
+        /* Main Content - Styles for Tech Boxes */
         .main-content {
             display: flex;
             flex-direction: column;
@@ -127,7 +141,7 @@
             color: var(--accent-color);
         }
 
-        /* Pages */
+        /* Pages Container */
         .pages-container {
             display: flex;
             flex-direction: column;
@@ -148,14 +162,16 @@
 
         .page-section.active {
             display: flex;
+            flex-direction: column; /* Stack info boxes on the main page */
         }
 
+        /* Friend Card Styles (same as before) */
         .friend-card {
             background-color: var(--secondary-bg);
             padding: 20px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            width: calc(33% - 20px); /* Three cards per row on larger screens */
+            width: calc(33% - 20px);
             min-width: 250px;
             box-sizing: border-box;
             display: flex;
@@ -203,45 +219,65 @@
             background-color: #4a90e2;
         }
 
-        /* Responsive Design */
+        /* Responsive Design (same as before) */
         @media (max-width: 768px) {
             .friend-card {
-                width: calc(50% - 15px); /* Two cards per row on smaller screens */
+                width: calc(50% - 15px);
             }
         }
 
         @media (max-width: 576px) {
             .friend-card {
-                width: 100%; /* One card per row on very small screens */
+                width: 100%;
             }
             .main-content, .page-section {
                 width: 95%;
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQmQa7TBCLF9vYg0jA3Q+DvwjMxjyKiZdq9+cGO3/glEqWoJWHD5axLDqc0jnhMAVPzkgjLxnF1Kdg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header class="main-header">
         <div class="social-links-container">
-            <a href="https://wa.me/qr/X27A72Q4KPHKC1" target="_blank" rel="noopener noreferrer" class="social-icon-link">WhatsApp</a>
-            <a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank" rel="noopener noreferrer" class="social-icon-link">TikTok</a>
-            <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" rel="noopener noreferrer" class="social-icon-link">Instagram</a>
-            <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" rel="noopener noreferrer" class="social-icon-link">Facebook</a>
+            <a href="https://wa.me/qr/X27A72Q4KPHKC1" target="_blank" rel="noopener noreferrer" class="social-icon-link">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank" rel="noopener noreferrer" class="social-icon-link">
+                <svg viewBox="0 0 48 48" class="tiktok-icon" style="width: 1em; height: 1em; fill: var(--text-primary);">
+                    <path d="M41 6c-4.4 0-8 3.6-8 8v26c0 4.4 3.6 8 8 8s8-3.6 8-8V14c0-4.4-3.6-8-8-8zM7 6c-4.4 0-8 3.6-8 8v26c0 4.4 3.6 8 8 8s8-3.6 8-8V14c0-4.4-3.6-8-8-8zM24 14c0-2.2-1.8-4-4-4s-4 1.8-4 4 1.8 4 4 4 4-1.8 4-4zm16 0c0-2.2-1.8-4-4-4s-4 1.8-4 4 1.8 4 4 4 4-1.8 4-4zM24 34c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"></path>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" rel="noopener noreferrer" class="social-icon-link">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" rel="noopener noreferrer" class="social-icon-link">
+                <i class="fab fa-facebook-f"></i>
+            </a>
         </div>
         <a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank" rel="noopener noreferrer" class="whatsapp-channel-button">Follow WhatsApp Channel</a>
     </header>
 
     <main class="main-content">
-        <section class="info-box">
-            <h2>My GitHub Repository</h2>
-            <p>Explore my coding journey and contributions on GitHub. Here you'll find a collection of projects that showcase my skills and passion for technology.</p>
-            <p><a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank" rel="noopener noreferrer"><strong>POPKID-XTECH Repository <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="inline-icon"><path d="M12 4a8 8 0 0 1 8 8 8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8m0 2a6 6 0 0 0-6 6 6 6 0 0 0 6 6 6 6 0 0 0 6-6 6 6 0 0 0-6-6m5 13.5v-2h-2v2h2m-6-2v-4h2v4h-2m-4-1.5v-2h2v2h-2m8.5-1.5v-2h2v2h-2m-6-2v-2h2v2h-2m-4-1.5v-2h2v2h-2M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10 10 10 0 0 0-10-10z"/></svg></strong></a></p>
-        </section>
-    </main>
-
-    <div class="pages-container">
         <section class="page-section active" id="page1">
-            </section>
+            <div class="info-box">
+                <h2>About Me</h2>
+                <p>Hello there! I'm Popkid, a passionate individual with a keen interest in technology and its ever-evolving landscape. I enjoy exploring new coding concepts, building innovative projects, and connecting with like-minded people in the digital space.</p>
+                <p>My journey in the tech world is driven by a desire to learn, create, and contribute to exciting developments. Whether it's diving into the intricacies of software development or exploring the creative potential of web design, I'm always eager to expand my horizons.</p>
+            </div>
+
+            <div class="info-box">
+                <h2>How to Reach Me</h2>
+                <p>I'm always open to connecting and collaborating. Here are a few ways you can get in touch:</p>
+                <ul>
+                    <li><strong>WhatsApp:</strong> <a href="https://wa.me/qr/X27A72Q4KPHKC1" target="_blank" rel="noopener noreferrer">Chat with me on WhatsApp</a></li>
+                    <li><strong>Instagram:</strong> <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" rel="noopener noreferrer">Follow me on Instagram</a></li>
+                    <li><strong>Facebook:</strong> <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" rel="noopener noreferrer">Connect with me on Facebook</a></li>
+                    <li><strong>GitHub:</strong> <a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank" rel="noopener noreferrer">Explore my projects on GitHub</a></li>
+                </ul>
+                <p>Feel free to reach out if you have any questions, collaboration ideas, or just want to say hello!</p>
+            </div>
+        </section>
 
         <section class="page-section" id="page2">
             <h2>My Network</h2>
@@ -285,25 +321,4 @@
 
     <script>
         const pageSections = document.querySelectorAll('.page-section');
-        const navigationButton = document.querySelector('.page-navigation-button');
-        let isFriendsPageVisible = false;
-
-        function togglePage() {
-            isFriendsPageVisible = !isFriendsPageVisible;
-            pageSections.forEach(section => {
-                section.classList.remove('active');
-            });
-
-            if (isFriendsPageVisible) {
-                document.getElementById('page2').classList.add('active');
-                navigationButton.textContent = 'Back to Portfolio';
-            } else {
-                document.getElementById('page1').classList.add('active');
-                navigationButton.textContent = 'View My Network';
-            }
-        }
-
-        // Initially show the portfolio section (page1 implicitly active)
-    </script>
-</body>
-</html>
+        const navigationButton = document.querySelector
