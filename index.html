@@ -207,13 +207,13 @@
 
     <div class="page-navigation">
       <button class="prev-button" onclick="showPage1()" id="prevButton" style="display: none;">Previous</button>
-      <button class="next-button" onclick="showPage2()" id="nextButton" style="display: none;">Next</button>
+      <button class="next-button" onclick="showPage2()" id="nextButton" style="display: inline-block;">Next</button>
       <button class="next-button" onclick="showPage3()" id="thirdButton" style="display: none;">Next</button>
       <button class="next-button" onclick="showPage4()" id="fourthButton" style="display: none;">Next</button>
     </div>
   </div>
 
-  <script/>
+  <script>
     function showPage1() {
       document.getElementById('page1').style.display = 'flex';
       document.getElementById('page2').style.display = 'none';
@@ -385,3 +385,7 @@
             options: {
               responsive: true,
               plugins: {
+                legend: { position: 'right', labels: { color: '#000' } },
+                tooltip: {
+                  backgroundColor: '#333',
+                  titleColor: '#fff
