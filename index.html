@@ -25,10 +25,48 @@
             background: rgba(30, 30, 30, 0.9);
             padding: 15px 20px;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
             z-index: 100;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .left-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            margin-right: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-toggle.open {
+            transform: rotate(90deg);
+        }
+
+        .bar {
+            width: 28px;
+            height: 3px;
+            background-color: #64ffda;
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-toggle.open .bar {
+            background-color: #a7ffe3;
+        }
+
+        .whatsapp-channel-container {
+            display: none; /* Initially hidden */
+        }
+
+        .whatsapp-channel-container.open {
+            display: block;
         }
 
         .social-link-top {
@@ -89,7 +127,7 @@
             transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             margin-left: auto;
-            animation: pulse 1.5s infinite alternate; /* Pulsating animation */
+            animation: pulse 1.5s infinite alternate;
         }
 
         @keyframes pulse {
@@ -233,6 +271,13 @@
 </head>
 <body>
     <div class="top-bar">
+        <div class="left-menu">
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
         <a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank" class="social-link-top">
             <span class="social-icon tiktok-icon">TikTok</span>
         </a>
@@ -242,7 +287,9 @@
         <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" class="social-link-top">
             <span class="social-icon facebook-icon">Facebook</span>
         </a>
-        <a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank" class="whatsapp-button">Follow WhatsApp Channel</a>
+        <div class="whatsapp-channel-container">
+            <a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank" class="whatsapp-button">Follow WhatsApp Channel</a>
+        </div>
     </div>
 
     <div class="info-container" id="page1">
@@ -281,6 +328,13 @@
     </div>
 
     <script>
+        function toggleMenu() {
+            const toggle = document.querySelector('.menu-toggle');
+            const whatsappContainer = document.querySelector('.whatsapp-channel-container');
+            toggle.classList.toggle('open');
+            whatsappContainer.classList.toggle('open');
+        }
+
         function showPage1() {
             document.getElementById('page1').style.display = 'flex';
             document.getElementById('page2').style.display = 'none';
