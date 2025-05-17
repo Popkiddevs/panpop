@@ -131,59 +131,86 @@
     #github-stats li {
       margin-bottom: 8px;
     }
+
+    .social-box {
+      background: #1f1f1f;
+      border: 1px solid #333;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .social-box img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .social-box p {
+      margin-bottom: 15px;
+      color: #eee;
+    }
+
+    .social-box button {
+      padding: 10px 20px;
+      background-color: #00FFAB;
+      color: #121212;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .social-box button:hover {
+      background-color: #00cc8f;
+    }
   </style>
 </head>
 <body>
-  <!-- Loader -->
   <div id="loader">
     <div class="circle"></div>
     <div id="progressText">Loading... 0%</div>
   </div>
 
-  <!-- Main Content -->
   <div class="container">
     <h1>Welcome to POPKID XTECH</h1>
 
-    <!-- Page 1 -->
-    <div class="friends-page" id="page1" style="display: flex; flex-direction: column; align-items: center;">
+    <div class="friends-page" id="page1" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;">
       <div class="friend-box">
         <img src="https://files.catbox.moe/8a67x2.jpg" alt="popkid" />
         <h3>POPKID</h3>
         <p>Welcome to my tech space! Here you'll find cool projects, bots, and developer tools I'm working on.</p>
       </div>
-
-      <!-- Social Links Section -->
-      <div style="margin-top: 30px; width: 100%;">
-        <h2 style="text-align:center; color:#00FFAB; margin-bottom: 20px;">Connect with Me</h2>
-        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-          <div class="friend-box" style="width: 220px;">
-            <h3>WhatsApp</h3>
-            <p>Chat with me instantly on WhatsApp using the QR code link.</p>
-            <button onclick="window.open('https://wa.me/qr/X27A72Q4KPHKC1', '_blank')" style="background:#25D366; color:#fff; border:none; padding:10px; border-radius:5px; cursor:pointer; width: 100%;">Open WhatsApp</button>
-          </div>
-          <div class="friend-box" style="width: 220px;">
-            <h3>TikTok</h3>
-            <p>Follow my creative videos and tech content on TikTok.</p>
-            <button onclick="window.open('https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1', '_blank')" style="background:#69C9D0; color:#fff; border:none; padding:10px; border-radius:5px; cursor:pointer; width: 100%;">Open TikTok</button>
-          </div>
-          <div class="friend-box" style="width: 220px;">
-            <h3>Instagram</h3>
-            <p>Check out my photos and stories on Instagram.</p>
-            <button onclick="window.open('https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==', '_blank')" style="background:#C13584; color:#fff; border:none; padding:10px; border-radius:5px; cursor:pointer; width: 100%;">Open Instagram</button>
-          </div>
-          <div class="friend-box" style="width: 220px;">
-            <h3>Facebook</h3>
-            <p>Connect with me on Facebook and stay updated.</p>
-            <button onclick="window.open('https://www.facebook.com/profile.php?id=100083684483339', '_blank')" style="background:#3b5998; color:#fff; border:none; padding:10px; border-radius:5px; cursor:pointer; width: 100%;">Open Facebook</button>
-          </div>
-        </div>
+      <div class="social-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp" style="border-radius: 0;">
+        <p>Chat with me directly on WhatsApp for quick questions or collaborations.</p>
+        <button onclick="window.open('https://wa.me/qr/X27A72Q4KPHKC1', '_blank')">WhatsApp</button>
+      </div>
+      <div class="social-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/TikTok_logo.svg/2048px-TikTok_logo.svg.png" alt="TikTok" style="border-radius: 0;">
+        <p>Catch my latest tech snippets and creative content on TikTok!</p>
+        <button onclick="window.open('https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1', '_blank')">TikTok</button>
+      </div>
+      <div class="social-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" alt="Instagram" style="border-radius: 0;">
+        <p>Follow me on Instagram for behind-the-scenes glimpses and more!</p>
+        <button onclick="window.open('https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==', '_blank')">Instagram</button>
+      </div>
+      <div class="social-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook" style="border-radius: 0;">
+        <p>Connect with me on Facebook for updates and broader discussions.</p>
+        <button onclick="window.open('https://www.facebook.com/profile.php?id=100083684483339', '_blank')">Facebook</button>
       </div>
     </div>
 
-    <!-- Page 2 -->
     <div class="friends-page" id="page2"></div>
 
-    <!-- Page 3 -->
     <div class="friends-page" id="page3">
       <div class="friend-box" style="width: 100%;">
         <h3>Education Journey</h3>
@@ -199,7 +226,6 @@
       </div>
     </div>
 
-    <!-- Page 4: GitHub Stats -->
     <div class="friends-page" id="page4" style="flex-direction: column; align-items: center;">
       <div id="github-stats">
         <h3>GitHub Stats for Popkiddevs</h3>
@@ -220,10 +246,9 @@
       </div>
     </div>
 
-    <!-- Page Navigation -->
     <div class="page-navigation">
       <button class="prev-button" onclick="showPage1()" id="prevButton" style="display: none;">Previous</button>
-      <button class="next-button" onclick="showPage2()" id="nextButton">Next</button>
+      <button class="next-button" onclick="showPage2()" id="nextButton" style="display: none;">Next</button>
       <button class="next-button" onclick="showPage3()" id="thirdButton" style="display: none;">Next</button>
       <button class="next-button" onclick="showPage4()" id="fourthButton" style="display: none;">Next</button>
     </div>
@@ -243,6 +268,8 @@
         clearInterval(interval);
         loader.style.display = 'none';
         container.style.display = 'block';
+        // Show the first page after loading
+        showPage1();
       }
     }, 30); // ~3 seconds total
 
@@ -262,4 +289,106 @@
     function showPage2() {
       document.getElementById('page1').style.display = 'none';
       document.getElementById('page2').style.display = 'flex';
-      document
+      document.getElementById('page3').style.display = 'none';
+      document.getElementById('page4').style.display = 'none';
+
+      document.getElementById('prevButton').style.display = 'inline-block';
+      document.getElementById('prevButton').onclick = showPage1;
+      document.getElementById('nextButton').style.display = 'none';
+      document.getElementById('thirdButton').style.display = 'inline-block';
+      document.getElementById('fourthButton').style.display = 'none';
+
+      const friendsContainer = document.getElementById('page2');
+      friendsContainer.innerHTML = `
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>HUSSEIN ICRAHM</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>SPARTA</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>TAYLOR</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>DAVIL XAVIER</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>DARK DEV</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>X MAN</h3></div>
+      `;
+    }
+
+    function showPage3() {
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page3').style.display = 'flex';
+      document.getElementById('page4').style.display = 'none';
+
+      document.getElementById('prevButton').style.display = 'inline-block';
+      document.getElementById('prevButton').onclick = showPage2;
+      document.getElementById('nextButton').style.display = 'none';
+      document.getElementById('thirdButton').style.display = 'none';
+      document.getElementById('fourthButton').style.display = 'inline-block';
+
+      if (!window.chartDrawn) {
+        drawEduChart();
+        window.chartDrawn = true;
+      }
+    }
+
+    function showPage4() {
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page3').style.display = 'none';
+      document.getElementById('page4').style.display = 'flex';
+
+      document.getElementById('prevButton').style.display = 'inline-block';
+      document.getElementById('prevButton').onclick = showPage3;
+      document.getElementById('nextButton').style.display = 'none';
+      document.getElementById('thirdButton').style.display = 'none';
+      document.getElementById('fourthButton').style.display = 'none';
+
+      if (!window.githubLoaded) {
+        loadGitHubStats();
+        window.githubLoaded = true;
+      }
+    }
+
+    // Education Chart
+    function drawEduChart() {
+      const ctx = document.getElementById('eduChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Primary School', 'High School', 'University'],
+          datasets: [
+            {
+              label: 'Years of Education',
+              data: [8, 4, 2],
+              backgroundColor: ['#4CAF50', '#2196F3', '#FF5722'],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true, ticks: { color: '#000' } },
+            x: { ticks: { color: '#000' } },
+          },
+          plugins: {
+            legend: { labels: { color: '#000' } },
+            tooltip: {
+              backgroundColor: '#333',
+              titleColor: '#fff',
+              bodyColor: '#fff',
+            },
+          },
+        },
+      });
+    }
+
+    // GitHub stats & projects loading
+    function loadGitHubStats() {
+      // Basic user info
+      fetch('https://api.github.com/users/Popkiddevs')
+        .then((res) => res.json())
+        .then((user) => {
+          document.getElementById('followers').textContent = user.followers;
+          document.getElementById('publicRepos').textContent = user.public_repos;
+        });
+
+      // Repos and aggregate open issues
+      fetch('https://api.github.com/users/Popkiddevs/repos?per_page=100')
+        .then((res) => res.json())
+        .then((repos) => {
