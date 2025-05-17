@@ -14,47 +14,11 @@
       padding: 0;
     }
 
-    #loader {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #121212;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      flex-direction: column;
-    }
-
-    .circle {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 10px solid #1f1f1f;
-      border-top: 10px solid #00FFAB;
-      animation: spin 1s linear infinite;
-    }
-
-    #progressText {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #00FFAB;
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
     .container {
       padding: 20px;
       max-width: 960px;
       margin: auto;
-      display: none;
+      display: block; /* Changed from 'none' to 'block' */
     }
 
     h1 {
@@ -173,11 +137,6 @@
   </style>
 </head>
 <body>
-  <div id="loader">
-    <div class="circle"></div>
-    <div id="progressText">Loading... 0%</div>
-  </div>
-
   <div class="container">
     <h1>Welcome to POPKID XTECH</h1>
 
@@ -255,24 +214,6 @@
   </div>
 
   <script>
-    // Loading Bar Circle
-    let progress = 0;
-    const loader = document.getElementById('loader');
-    const container = document.querySelector('.container');
-    const progressText = document.getElementById('progressText');
-
-    const interval = setInterval(() => {
-      progress++;
-      progressText.textContent = `Loading... ${progress}%`;
-      if (progress >= 100) {
-        clearInterval(interval);
-        loader.style.display = 'none';
-        container.style.display = 'block';
-        // Show the first page after loading
-        showPage1();
-      }
-    }, 30); // ~3 seconds total
-
     // Page navigation functions
     function showPage1() {
       document.getElementById('page1').style.display = 'flex';
@@ -392,3 +333,118 @@
       fetch('https://api.github.com/users/Popkiddevs/repos?per_page=100')
         .then((res) => res.json())
         .then((repos) => {
+          // Calculate total open issues
+          const totalOpenIssues = repos.reduce(
+            (sum, repo) => sum + repo.open_issues_count,
+            0
+          );
+          document.getElementById('openIssues').textContent = totalOpenIssues;
+
+          // Top 5 repos by stars
+          const sorted = repos.sort(
+            (a, b) => b.stargazers_count - a.stargazers_count
+          );
+          const list = sorted
+            .slice(0, 5)
+            .map(
+              (repo) =>
+                `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a>: ⭐ ${repo.stargazers_count}</li>`
+            )
+            .join('');
+          document.getElementById('top-projects').innerHTML = list;
+
+          // Language usage chart
+          const langCount = {};
+          repos.forEach((repo) => {
+            if (repo.language) {
+              langCount[repo.language] = (langCount[repo.language] || 0) + 1;
+            }
+          });
+
+          const langCtx = document
+            .getElementById('langChart')
+            .getContext('2d');
+          new Chart(langCtx, {
+            type: 'pie',
+            data: {
+              labels: Object.keys(langCount),
+              datasets: [
+                {
+                  data: Object.values(langCount),
+                  backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#4BC0C0',
+                    '#9966FF',
+                    '#FF9F40',
+                    '#C9CBCF',
+                  ],
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { labels: { color: '#fff' } },
+              },
+            },
+          });
+        });
+
+      // Commit activity - last 7 days
+      fetch('https://api.github.com/users/Popkiddevs/events')
+        .then((res) => res.json())
+        .then((events) => {
+          const commitsPerDay = Array(7).fill(0);
+          const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+          events.forEach((event) => {
+            if (event.type === 'PushEvent') {
+              const day = new Date(event.created_at).getDay();
+              commitsPerDay[day] += event.payload.commits.length;
+            }
+          });
+
+          const commitCtx = document
+            .getElementById('commitChart')
+            .getContext('2d');
+          new Chart(commitCtx, {
+            type: 'bar',
+            data: {
+              labels: days,
+              datasets: [
+                {
+                  label: 'Commits This Week',
+                  data: commitsPerDay,
+                  backgroundColor: '#00FFAB',
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: { color: '#fff' },
+                },
+                x: {
+                  ticks: { color: '#fff' },
+                },
+              },
+              plugins: {
+                legend: { labels: { color: '#fff' } },
+              },
+            },
+          });
+        })
+        .catch((err) => {
+          console.error('Error loading commit data:', err);
+        });
+    }
+
+    // Call showPage1 to display the first page after the content is loaded
+    showPage1();
+  </script>
+</body>
+</html>
