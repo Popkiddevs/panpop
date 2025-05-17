@@ -3,139 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popkid's Lumina</title>
-    <link rel="stylesheet" href="lumina-styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuQl1gaewi5F+eMOHfw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Popkid's Universe</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #121212;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1e1e1e;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-menu-toggle {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #f0f0f0;
+            margin: 3px 0;
+            transition: 0.4s;
+        }
+
+        .social-links {
+            position: absolute;
+            top: 55px;
+            right: 15px;
+            background-color: #2c2c2c;
+            border-radius: 5px;
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-links.open {
+            display: flex;
+        }
+
+        .social-links a {
+            color: #f0f0f0;
+            text-decoration: none;
+            margin: 5px 0;
+            padding: 8px 15px;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #3a3a3a;
+        }
+
+        .whatsapp-button {
+            background-color: #25D366;
+            color: #f0f0f0;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+        }
+
+        .info-container {
+            margin-top: 80px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .tech-box {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: calc(33% - 20px); /* Adjust width for responsiveness */
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .tech-box h2 {
+            color: #64ffda;
+            margin-bottom: 10px;
+        }
+
+        .tech-box p, .tech-box a {
+            color: #f0f0f0;
+            text-decoration: none;
+        }
+
+        .tech-box a:hover {
+            color: #64ffda;
+        }
+
+        .page-navigation {
+            margin-top: 30px;
+        }
+
+        .next-button {
+            background-color: #64ffda;
+            color: #121212;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .next-button:hover {
+            background-color: #a7ffe3;
+        }
+
+        .friends-page {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 80px;
+        }
+
+        .friend-box {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: calc(33% - 20px);
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .friend-box img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .friend-box h3 {
+            color: #f0f0f0;
+            margin-bottom: 5px;
+        }
+
+        /* Modern and Fancy Animations (you can expand on these) */
+        .tech-box {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .tech-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .friend-box {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .friend-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+    </style>
 </head>
-<body class="lumina-bg">
-    <header class="lumina-header">
-        <nav class="lumina-nav">
-            <ul class="lumina-social-links">
-                <li class="lumina-social-item">
-                    <a href="https://wa.me/qr/X27A72Q4KPHKC1" target="_blank" rel="noopener noreferrer" class="lumina-social-link" aria-label="WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                </li>
-                <li class="lumina-social-item">
-                    <a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank" rel="noopener noreferrer" class="lumina-social-link" aria-label="TikTok">
-                        <svg viewBox="0 0 48 48" class="lumina-tiktok-icon">
-                            <path d="M41 6c-4.4 0-8 3.6-8 8v26c0 4.4 3.6 8 8 8s8-3.6 8-8V14c0-4.4-3.6-8-8-8zM7 6c-4.4 0-8 3.6-8 8v26c0 4.4 3.6 8 8 8s8-3.6 8-8V14c0-4.4-3.6-8-8-8zM24 14c0-2.2-1.8-4-4-4s-4 1.8-4 4 1.8 4 4 4 4-1.8 4-4zm16 0c0-2.2-1.8-4-4-4s-4 1.8-4 4 1.8 4 4 4 4-1.8 4-4zM24 34c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"></path>
-                        </svg>
-                    </a>
-                </li>
-                <li class="lumina-social-item">
-                    <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" rel="noopener noreferrer" class="lumina-social-link" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </li>
-                <li class="lumina-social-item">
-                    <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" rel="noopener noreferrer" class="lumina-social-link" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                </li>
-            </ul>
-            <a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank" rel="noopener noreferrer" class="lumina-whatsapp-button">
-                <i class="fa-solid fa-link"></i> Follow Channel
-            </a>
-        </nav>
-    </header>
-
-    <main class="lumina-main-content">
-        <section id="lumina-about" class="lumina-section active">
-            <h1 class="lumina-title">Ethereal Echoes of Innovation</h1>
-            <div class="lumina-info-container">
-                <div class="lumina-info-card">
-                    <h2 class="lumina-card-title"><i class="fa-regular fa-lightbulb"></i> The Spark Within</h2>
-                    <p class="lumina-card-text">In the realm where digital artistry intertwines with technological prowess, I, Popkid, embark on a journey of creation. My passion lies in sculpting elegant code and crafting experiences that resonate with intuitive grace.</p>
-                </div>
-                <div class="lumina-info-card">
-                    <h2 class="lumina-card-title"><i class="fa-solid fa-code"></i> Weaving the Digital Tapestry</h2>
-                    <p class="lumina-card-text">My hands dance across the keyboard, weaving intricate patterns of HTML, CSS, and JavaScript. I delve into the artistry of frontend frameworks and explore the depths of backend architectures, always seeking harmony between form and function.</p>
-                </div>
-                <div class="lumina-info-card">
-                    <h2 class="lumina-card-title"><i class="fa-solid fa-wand-magic-sparkles"></i> The Pursuit of Elegance</h2>
-                    <p class="lumina-card-text">Beyond the lines of code, I am captivated by the pursuit of elegant solutions. I believe that technology, at its finest, should feel seamless and intuitive, a natural extension of human thought and creativity.</p>
-                </div>
+<body>
+    <div class="top-bar">
+        <div class="social-menu">
+            <div class="social-menu-toggle" onclick="toggleSocialMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
-        </section>
-
-        <section id="lumina-contact" class="lumina-section">
-            <h1 class="lumina-title">Whispers of Connection</h1>
-            <div class="lumina-info-container">
-                <div class="lumina-contact-card">
-                    <h2 class="lumina-card-title"><i class="fa-regular fa-address-book"></i> Reach Out and Connect</h2>
-                    <p class="lumina-card-text">Should your curiosity beckon or a collaborative spirit ignite, I welcome your connection through these digital pathways:</p>
-                    <ul class="lumina-contact-list">
-                        <li class="lumina-contact-item"><i class="fab fa-whatsapp"></i> <a href="https://wa.me/qr/X27A72Q4KPHKC1" target="_blank" rel="noopener noreferrer" class="lumina-link">Vibrant Conversations on WhatsApp</a></li>
-                        <li class="lumina-contact-item"><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" rel="noopener noreferrer" class="lumina-link">Glimpses of My World on Instagram</a></li>
-                        <li class="lumina-contact-item"><i class="fab fa-facebook-f"></i> <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" rel="noopener noreferrer" class="lumina-link">Echoes of Thought on Facebook</a></li>
-                        <li class="lumina-contact-item"><i class="fab fa-github"></i> <a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank" rel="noopener noreferrer" class="lumina-link">Digital Artifacts on GitHub</a></li>
-                    </ul>
-                </div>
-                <div class="lumina-message-card">
-                    <h2 class="lumina-card-title"><i class="fa-regular fa-paper-plane"></i> Send a Digital Missive</h2>
-                    <p class="lumina-card-text">Whether you carry questions, ideas, or simply a desire to connect, do not hesitate to send your digital missive. I eagerly await the unfolding of new dialogues.</p>
-                </div>
+            <div class="social-links">
+                <a href="https://wa.me/qr/X27A72Q4KPHKC1" target="_blank">WhatsApp</a>
+                <a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank">TikTok</a>
+                <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank">Instagram</a>
+                <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank">Facebook</a>
             </div>
-        </section>
+        </div>
+        <a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank" class="whatsapp-button">Follow WhatsApp Channel</a>
+    </div>
 
-        <section id="lumina-github" class="lumina-section">
-            <h1 class="lumina-title">Sanctum of Digital Creations</h1>
-            <div class="lumina-project-grid">
-                <div class="lumina-project-card">
-                    <h3 class="lumina-project-title"><i class="fa-brands fa-github"></i> POPKID-XTECH</h3>
-                    <p class="lumina-project-description">Within this repository lies the genesis of my digital explorations, a collection of web development endeavors and personal projects. Peer into the code and perhaps, find inspiration.</p>
-                    <a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank" rel="noopener noreferrer" class="lumina-project-link">Explore the Archives</a>
-                </div>
-                <div class="lumina-project-card">
-                    <h3 class="lumina-project-title"><i class="fa-brands fa-github"></i> Lumina-Sketches</h3>
-                    <p class="lumina-project-description">A digital sketchbook where nascent ideas take form as experimental code and design concepts. Witness the unfolding of creativity in its rawest state.</p>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="lumina-project-link inactive">Awaiting Unveiling</a>
-                </div>
-                <div class="lumina-project-card">
-                    <h3 class="lumina-project-title"><i class="fa-brands fa-github"></i> Echoes-of-Interface</h3>
-                    <p class="lumina-project-description">An exploration into the subtle nuances of user interface design, where interactions are crafted with intention and aesthetics are imbued with purpose.</p>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="lumina-project-link inactive">Currently in Development</a>
-                </div>
-            </div>
-        </section>
-    </main>
+    <div class="info-container" id="page1">
+        <div class="tech-box">
+            <h2>My GitHub Repository</h2>
+            <p><a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank">POPKID-XTECH</a></p>
+            <p>Check out my latest projects and contributions!</p>
+        </div>
+        </div>
 
-    <footer class="lumina-footer">
-        <nav class="lumina-pagination">
-            <button class="lumina-page-button active" data-target="lumina-about"><i class="fa-regular fa-user"></i> Lumina</button>
-            <button class="lumina-page-button" data-target="lumina-contact"><i class="fa-regular fa-envelope"></i> Connect</button>
-            <button class="lumina-page-button" data-target="lumina-github"><i class="fa-brands fa-github"></i> Creations</button>
-        </nav>
-    </footer>
+    <div class="friends-page" id="page2">
+        </div>
+
+    <div class="page-navigation">
+        <button class="next-button" onclick="showPage2()">Next</button>
+        <button class="next-button" onclick="showPage1()" style="display: none;" id="prevButton">Previous</button>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.lumina-section');
-            const navButtons = document.querySelectorAll('.lumina-page-button');
+        function toggleSocialMenu() {
+            document.querySelector('.social-links').classList.toggle('open');
+        }
 
-            function showSection(id) {
-                sections.forEach(section => section.classList.remove('active'));
-                document.getElementById(id).classList.add('active');
-                navButtons.forEach(button => button.classList.remove('active'));
-                const activeButton = Array.from(navButtons).find(button => button.dataset.target === id);
-                if (activeButton) {
-                    activeButton.classList.add('active');
-                }
-            }
+        function showPage1() {
+            document.getElementById('page1').style.display = 'flex';
+            document.getElementById('page2').style.display = 'none';
+            document.querySelector('.page-navigation').style.display = 'flex';
+            document.getElementById('prevButton').style.display = 'none';
+            document.querySelector('.next-button').style.display = 'inline-block';
+        }
 
-            navButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const target = this.dataset.target;
-                    showSection(target);
-                });
-            });
+        function showPage2() {
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('page2').style.display = 'flex';
+            document.querySelector('.page-navigation').style.display = 'flex';
+            document.getElementById('prevButton').style.display = 'inline-block';
+            document.querySelector('.next-button').style.display = 'none';
 
-            showSection('lumina-about');
-        });
+            // Add your friends' information here dynamically or directly in the HTML
+            const friendsContainer = document.getElementById('page2');
+            friendsContainer.innerHTML = `
+                <div class="friend-box">
+                    <img src="https://via.placeholder.com/80/FFC107/000000?Text=Friend1" alt="Friend 1">
+                    <h3>Friend One</h3>
+                </div>
+                <div class="friend-box">
+                    <img src="https://via.placeholder.com/80/4CAF50/FFFFFF?Text=Friend2" alt="Friend 2">
+                    <h3>Another Pal</h3>
+                </div>
+                <div class="friend-box">
+                    <img src="https://via.placeholder.com/80/2196F3/FFFFFF?Text=Buddy3" alt="Buddy 3">
+                    <h3>Cool Person</h3>
+                </div>
+                `;
+        }
     </script>
 </body>
 </html>
