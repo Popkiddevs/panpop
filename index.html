@@ -3,65 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popkid's Digital Space</title>
+    <title>Popkid - Dynamic Developer Showcase</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <div class="logo">
-                <a href="#">Popkid</a>
-            </div>
-            <div class="toggle-menu">
-                <button id="followToggle">
-                    <i class="fas fa-share-alt"></i> Follow Me & More
-                </button>
-                <ul class="follow-links" id="followLinks">
-                    <li><a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a></li>
-                    <li><a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
-                    <li><a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
-                    <li><a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
-                    <li><a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
-                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-                </ul>
-            </div>
-        </aside>
-        <main class="content">
-            <section id="about">
-                <h2>About Me</h2>
-                <p>Hello there! I'm Popkid, a passionate creator exploring the exciting realms of technology and digital innovation right here in Kenya. I'm driven by a curiosity to build and share my journey through various online platforms. From coding adventures on GitHub to sharing moments on Instagram, connecting with others on Facebook, and creating engaging content on TikTok, I love to explore and learn. This digital space is a hub for my explorations and creations.</p>
-                <p>Feel free to connect with me through the links on the sidebar!</p>
-            </section>
+    <header class="top-links">
+        <div class="corner-link top-left">
+            <a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank" title="WhatsApp Channel"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+        </div>
+        <div class="corner-link top-right">
+            <a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#contact" title="Contact"><i class="fas fa-envelope"></i></a>
+        </div>
+    </header>
 
-            <section id="projects">
-                <h2>My Projects</h2>
-                <div class="project-list">
-                    <div class="project-item">
-                        <h3>POPKID-XTECH (GitHub)</h3>
-                        <p>This repository on GitHub hosts some of my coding projects and experiments. You can find the source code and contribute if you're interested!</p>
-                        <a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-                    </div>
-                    <div class="project-item">
-                        <h3>[Project Name 2]</h3>
-                        <p>[Brief description of your second project.]</p>
-                        </div>
-                    </div>
-            </section>
+    <main class="main-content">
+        <section id="about">
+            <h1>Hello, I'm Popkid</h1>
+            <p class="lead animated-box" data-animation="slide-up">An aspiring developer from Kenya with a passion for building innovative digital solutions and exploring the ever-evolving world of technology.</p>
+            <div class="animated-box" data-animation="slide-left">
+                <h3>My Focus</h3>
+                <p>Currently focused on web development, exploring modern JavaScript frameworks, and diving into the world of Python for backend and automation.</p>
+            </div>
+            <div class="animated-box" data-animation="slide-right">
+                <h3>My Journey</h3>
+                <p>My journey involves continuous learning, tackling exciting coding challenges, and a strong desire to contribute to the tech community in Kenya and beyond.</p>
+            </div>
+            <div class="animated-box" data-animation="fade-in">
+                <h3>Connect With Me</h3>
+                <p>Explore my projects on GitHub and connect with me on social media through the links at the top!</p>
+            </div>
+        </section>
 
-            <section id="contact">
-                <h2>Contact Me</h2>
-                <p>I'm always open to connecting and collaborating. Feel free to reach out through any of the social links in the sidebar. If you have specific inquiries, you can also send me a message through [Your Preferred Contact Method - e.g., a social media platform DM].</p>
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="project-list">
+                <div class="project-card animated-box" data-animation="slide-up" data-delay="0.2s">
+                    <h3>POPKID-XTECH Repository</h3>
+                    <p>A collection of my coding projects and experiments on GitHub. Explore the source code and see what I've been working on.</p>
+                    <a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+                </div>
+                <div class="project-card animated-box" data-animation="slide-left" data-delay="0.4s">
+                    <h3>[Project Name 2]</h3>
+                    <p>[Short, compelling description of your second project and its purpose.]</p>
+                    </div>
+                </div>
+        </section>
+
+        <section id="contact" class="animated-box" data-animation="slide-down">
+            <h2>Get In Touch</h2>
+            <p>I'm always open to new opportunities and collaborations. You can connect with me through the social links at the top of the page or send me a direct message on [Your Preferred Contact Platform].</p>
             </section>
-        </main>
-    </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Popkid. All rights reserved.</p>
+    </footer>
 
     <script>
-        const followToggle = document.getElementById('followToggle');
-        const followLinks = document.getElementById('followLinks');
+        const animatedBoxes = document.querySelectorAll('.animated-box');
 
-        followToggle.addEventListener('click', () => {
-            followLinks.classList.toggle('show-links');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger animation when 10% of the element is visible
+        });
+
+        animatedBoxes.forEach(box => {
+            observer.observe(box);
+            const animation = box.dataset.animation;
+            const delay = box.dataset.delay || '0s';
+            box.style.animationDelay = delay;
+            box.classList.add(animation); // Add initial animation class for setup
         });
     </script>
 </body>
