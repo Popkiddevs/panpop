@@ -42,8 +42,10 @@ body {
     padding: 80px 30px 50px; /* Adjust top padding for fixed header */
     max-width: 960px;
     margin: 0 auto;
+    transition: transform 0.3s ease-in-out; /* For potential right swipe to close */
 }
 
+/* Styles for About, Projects, Contact remain the same as before */
 #about, #projects, #contact {
     margin-bottom: 60px;
 }
