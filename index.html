@@ -25,7 +25,7 @@
             background: rgba(30, 30, 30, 0.9);
             padding: 15px 20px;
             display: flex;
-            justify-content: flex-start; /* Align items to the start */
+            justify-content: flex-start;
             align-items: center;
             z-index: 100;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -46,7 +46,35 @@
 
         .social-icon {
             margin-right: 5px;
-            font-size: 1.2em; /* Adjust size as needed */
+            font-size: 1.3em;
+            font-weight: bold;
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-size: 200% 100%;
+            animation: shine 2s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% 0;
+            }
+        }
+
+        .tiktok-icon {
+            background-image: linear-gradient(90deg, #69C9D0, #EE1D52, #000000);
+        }
+
+        .instagram-icon {
+            background-image: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            border-radius: 5px; /* Simulate camera lens */
+            padding: 2px;
+        }
+
+        .facebook-icon {
+            color: #1877F2;
+            -webkit-text-fill-color: #1877F2;
+            background-image: none;
         }
 
         .whatsapp-button {
@@ -58,14 +86,27 @@
             cursor: pointer;
             text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            margin-left: auto; /* Push to the right */
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-left: auto;
+            animation: pulse 1.5s infinite alternate; /* Pulsating animation */
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            to {
+                transform: scale(1.05);
+                opacity: 1;
+            }
         }
 
         .whatsapp-button:hover {
             background-color: #128C7E;
-            transform: scale(1.05);
+            transform: scale(1.08);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
 
         .info-container {
@@ -193,13 +234,13 @@
 <body>
     <div class="top-bar">
         <a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank" class="social-link-top">
-            <span class="social-icon">🎵</span> TikTok
+            <span class="social-icon tiktok-icon">TikTok</span>
         </a>
         <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" class="social-link-top">
-            <span class="social-icon">📸</span> Instagram
+            <span class="social-icon instagram-icon">Instagram</span>
         </a>
         <a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank" class="social-link-top">
-            <span class="social-icon">f</span> Facebook
+            <span class="social-icon facebook-icon">Facebook</span>
         </a>
         <a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank" class="whatsapp-button">Follow WhatsApp Channel</a>
     </div>
