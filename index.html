@@ -14,10 +14,43 @@
       padding: 0;
     }
 
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #121212;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    .circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 10px solid #1f1f1f;
+      border-top: 10px solid #00FFAB;
+      animation: spin 1s linear infinite;
+    }
+
+    #progressText {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #00FFAB;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     .container {
       padding: 20px;
       max-width: 960px;
       margin: auto;
+      display: none;
     }
 
     h1 {
@@ -77,6 +110,14 @@
   </style>
 </head>
 <body>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="circle"></div>
+    <div id="progressText">Loading... 0%</div>
+  </div>
+
+  <!-- Main Content -->
   <div class="container">
     <h1>Welcome to POPKID XTECH</h1>
 
@@ -90,9 +131,7 @@
     </div>
 
     <!-- Page 2 -->
-    <div class="friends-page" id="page2">
-      <!-- Filled dynamically -->
-    </div>
+    <div class="friends-page" id="page2"></div>
 
     <!-- Page 3 -->
     <div class="friends-page" id="page3">
@@ -115,6 +154,23 @@
   </div>
 
   <script>
+    // Loading Bar Circle
+    let progress = 0;
+    const loader = document.getElementById('loader');
+    const container = document.querySelector('.container');
+    const progressText = document.getElementById('progressText');
+
+    const interval = setInterval(() => {
+      progress++;
+      progressText.textContent = `Loading... ${progress}%`;
+      if (progress >= 100) {
+        clearInterval(interval);
+        loader.style.display = 'none';
+        container.style.display = 'block';
+      }
+    }, 30); // ~3 seconds total
+
+    // Page navigation
     function showPage1() {
       document.getElementById('page1').style.display = 'flex';
       document.getElementById('page2').style.display = 'none';
@@ -135,30 +191,12 @@
 
       const friendsContainer = document.getElementById('page2');
       friendsContainer.innerHTML = `
-        <div class="friend-box">
-          <img src="https://via.placeholder.com/120/FFC107/FFFFFF?Text=Friend1" alt="Friend 1">
-          <h3>Awesome Coder</h3>
-        </div>
-        <div class="friend-box">
-          <img src="https://via.placeholder.com/120/4CAF50/FFFFFF?Text=TechGuru" alt="Tech Guru">
-          <h3>Tech Enthusiast</h3>
-        </div>
-        <div class="friend-box">
-          <img src="https://via.placeholder.com/120/2196F3/FFFFFF?Text=WebMaster" alt="Web Master">
-          <h3>Web Dev Pro</h3>
-        </div>
-        <div class="friend-box">
-          <img src="https://via.placeholder.com/120/9C27B0/FFFFFF?Text=DataKing" alt="Data King">
-          <h3>Data Wiz</h3>
-        </div>
-        <div class="friend-box">
-          <img src="https://via.placeholder.com/120/FF9800/FFFFFF?Text=DesignPro" alt="Design Pro">
-          <h3>UI/UX Master</h3>
-        </div>
-        <div class="friend-box">
-          <img src="https://via.placeholder.com/120/607D8B/FFFFFF?Text=CloudAce" alt="Cloud Ace">
-          <h3>Cloud Expert</h3>
-        </div>
+        <div class="friend-box"><img src="https://via.placeholder.com/120/FFC107/FFFFFF?Text=Friend1"><h3>Awesome Coder</h3></div>
+        <div class="friend-box"><img src="https://via.placeholder.com/120/4CAF50/FFFFFF?Text=TechGuru"><h3>Tech Enthusiast</h3></div>
+        <div class="friend-box"><img src="https://via.placeholder.com/120/2196F3/FFFFFF?Text=WebMaster"><h3>Web Dev Pro</h3></div>
+        <div class="friend-box"><img src="https://via.placeholder.com/120/9C27B0/FFFFFF?Text=DataKing"><h3>Data Wiz</h3></div>
+        <div class="friend-box"><img src="https://via.placeholder.com/120/FF9800/FFFFFF?Text=DesignPro"><h3>UI/UX Master</h3></div>
+        <div class="friend-box"><img src="https://via.placeholder.com/120/607D8B/FFFFFF?Text=CloudAce"><h3>Cloud Expert</h3></div>
       `;
     }
 
@@ -171,7 +209,6 @@
       document.getElementById('nextButton').style.display = 'none';
       document.getElementById('thirdButton').style.display = 'none';
 
-      // Draw chart only once
       if (!window.chartDrawn) {
         drawChart();
         window.chartDrawn = true;
@@ -186,31 +223,18 @@
           labels: ['Primary School', 'High School', 'University'],
           datasets: [{
             label: 'Years of Education',
-            data: [8, 4, 2], // Example: 8 years primary, 4 high school, 2 university so far
+            data: [8, 4, 2],
             backgroundColor: ['#4CAF50', '#2196F3', '#FF5722']
           }]
         },
         options: {
           responsive: true,
           scales: {
-            y: {
-              beginAtZero: true,
-              ticks: {
-                color: '#000'
-              }
-            },
-            x: {
-              ticks: {
-                color: '#000'
-              }
-            }
+            y: { beginAtZero: true, ticks: { color: '#000' } },
+            x: { ticks: { color: '#000' } }
           },
           plugins: {
-            legend: {
-              labels: {
-                color: '#000'
-              }
-            },
+            legend: { labels: { color: '#000' } },
             tooltip: {
               backgroundColor: '#333',
               titleColor: '#fff',
