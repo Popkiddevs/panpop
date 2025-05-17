@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Popkid's Digital Hub</title>
     <style>
-        /* Global Styles (same as before) */
+        /* Global Styles */
         :root {
             --primary-bg: #1e1e1e;
             --secondary-bg: #2c2c2c;
@@ -31,7 +31,7 @@
             transition: background-color var(--transition-duration) ease;
         }
 
-        /* Header (same as before) */
+        /* Header */
         .main-header {
             position: fixed;
             top: 0;
@@ -57,13 +57,13 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
+            width: 36px; /* Adjust size as needed */
             height: 36px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.1); /* Subtle background */
             color: var(--text-primary);
             text-decoration: none;
-            font-size: 20px;
+            font-size: 20px; /* Adjust icon size */
             transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease, transform 0.2s ease-in-out;
         }
 
@@ -73,14 +73,59 @@
             transform: scale(1.1);
         }
 
-        /* Icons (same as before, ensure Font Awesome is linked) */
-        .fa-whatsapp { color: #25D366; }
-        .fa-instagram { color: #e4405f; }
-        .fa-facebook-f { color: #3b5998; }
+        /* Styling for specific icons */
+        .fa-whatsapp {
+            color: #25D366; /* Official WhatsApp Green */
+            font-size: 1.3em; /* Slightly larger */
+        }
 
-        /* TikTok SVG Icon (inline for simplicity) */
+        .fa-instagram {
+            /* Instagram's gradient can be complex, let's use a solid vibrant color */
+            color: #e4405f; /* A strong pink/red from their palette */
+            font-size: 1.3em;
+        }
+
+        .fa-facebook-f {
+            color: #3b5998; /* Official Facebook Blue */
+            font-size: 1.3em;
+        }
+
+        /* Refined TikTok Styling */
+        .tiktok-icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #000; /* TikTok's dark background */
+        }
+
         .tiktok-icon {
-            /* Style the SVG directly if needed */
+            /* TikTok's layered logo - using text with specific styling */
+            position: relative;
+            width: 20px;
+            height: 20px;
+        }
+
+        .tiktok-icon::before,
+        .tiktok-icon::after {
+            content: 't';
+            font-family: 'sans-serif';
+            font-weight: bold;
+            font-size: 1.5em;
+            position: absolute;
+            top: -1px;
+        }
+
+        .tiktok-icon::before {
+            color: #fe2c55; /* Reddish color */
+            left: -2px;
+        }
+
+        .tiktok-icon::after {
+            color: #00f2ea; /* Cyan color */
+            right: -2px;
         }
 
         .whatsapp-channel-button {
@@ -99,7 +144,7 @@
             background-color: #128C7E;
         }
 
-        /* Main Content - Styles for Tech Boxes */
+        /* Main Content */
         .main-content {
             display: flex;
             flex-direction: column;
@@ -158,14 +203,14 @@
             margin-top: 20px;
             flex-wrap: wrap;
             justify-content: center;
+            flex-direction: column; /* Stack info boxes on the main page */
         }
 
         .page-section.active {
             display: flex;
-            flex-direction: column; /* Stack info boxes on the main page */
         }
 
-        /* Friend Card Styles (same as before) */
+        /* Friend Card Styles */
         .friend-card {
             background-color: var(--secondary-bg);
             padding: 20px;
@@ -219,7 +264,7 @@
             background-color: #4a90e2;
         }
 
-        /* Responsive Design (same as before) */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .friend-card {
                 width: calc(50% - 15px);
@@ -244,9 +289,9 @@
                 <i class="fab fa-whatsapp"></i>
             </a>
             <a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank" rel="noopener noreferrer" class="social-icon-link">
-                <svg viewBox="0 0 48 48" class="tiktok-icon" style="width: 1em; height: 1em; fill: var(--text-primary);">
-                    <path d="M41 6c-4.4 0-8 3.6-8 8v26c0 4.4 3.6 8 8 8s8-3.6 8-8V14c0-4.4-3.6-8-8-8zM7 6c-4.4 0-8 3.6-8 8v26c0 4.4 3.6 8 8 8s8-3.6 8-8V14c0-4.4-3.6-8-8-8zM24 14c0-2.2-1.8-4-4-4s-4 1.8-4 4 1.8 4 4 4 4-1.8 4-4zm16 0c0-2.2-1.8-4-4-4s-4 1.8-4 4 1.8 4 4 4 4-1.8 4-4zM24 34c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"></path>
-                </svg>
+                <div class="tiktok-icon-wrapper">
+                    <div class="tiktok-icon"></div>
+                </div>
             </a>
             <a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank" rel="noopener noreferrer" class="social-icon-link">
                 <i class="fab fa-instagram"></i>
@@ -277,6 +322,12 @@
                 </ul>
                 <p>Feel free to reach out if you have any questions, collaboration ideas, or just want to say hello!</p>
             </div>
+
+            <div class="info-box">
+                <h2>My GitHub Repository</h2>
+                <p>Check out my latest projects and contributions on GitHub:</p>
+                <p><a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank" rel="noopener noreferrer"><strong>POPKID-XTECH Repository <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="inline-icon"><path d="M12 4a8 8 0 0 1 8 8 8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8m0 2a6 6 0 0 0-6 6 6 6 0 0 0 6 6 6 6 0 0 0 6-6 6 6 0 0 0-6-6m5 13.5v-2h-2v2h2m-6-2v-4h2v4h-2m-4-1.5v-2h2v2h-2m8.5-1.5v-2h2v2h-2m-6-2v-2h2v2h-2m-4-1.5v-2h2v2h-2M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10 10 10 0 0 0-10-10z"/></svg></strong></a></p>
+            </div>
         </section>
 
         <section class="page-section" id="page2">
@@ -296,29 +347,4 @@
                 <div class="friend-card">
                     <img src="https://via.placeholder.com/100/64b5f6/fff?Text=DN" alt="DataNinja" class="friend-avatar">
                     <h3 class="friend-name">DataNinja</h3>
-                    <p style="color: var(--text-primary);">Exploring the power of data and extracting meaningful insights.</p>
-                </div>
-                <div class="friend-card">
-                    <img src="https://via.placeholder.com/100/ffb74d/fff?Text=WW" alt="WebWiz" class="friend-avatar">
-                    <h3 class="friend-name">WebWiz</h3>
-                    <p style="color: var(--text-primary);">Crafting seamless web experiences and pushing the boundaries of front-end development.</p>
-                </div>
-                <div class="friend-card">
-                    <img src="https://via.placeholder.com/100/9575cd/fff?Text=AN" alt="AlgoAce" class="friend-avatar">
-                    <h3 class="friend-name">AlgoAce</h3>
-                    <p style="color: var(--text-primary);">Deeply immersed in the world of algorithms and data structures.</p>
-                </div>
-                <div class="friend-card">
-                    <img src="https://via.placeholder.com/100/4dd0e1/fff?Text=MobDev" alt="MobileMaestro" class="friend-avatar">
-                    <h3 class="friend-name">MobileMaestro</h3>
-                    <p style="color: var(--text-primary);">Building innovative and user-friendly mobile applications.</p>
-                </div>
-            </div>
-        </section>
-
-        <button class="page-navigation-button" onclick="togglePage()">View My Network</button>
-    </div>
-
-    <script>
-        const pageSections = document.querySelectorAll('.page-section');
-        const navigationButton = document.querySelector
+                    <p style="color: var(--text-
