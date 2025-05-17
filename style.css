@@ -2,184 +2,176 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #181818; /* Dark background for a tech feel */
-    color: #f0f0f0; /* Light text color */
-    display: flex;
-    min-height: 100vh;
-    overflow-x: hidden; /* Prevent horizontal scrollbar */
+    background: linear-gradient(45deg, #1e3a8a, #14532d, #7e57c2, #0f766e); /* Multiple fancy colors */
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    color: #f0f8ea; /* Light, fancy text color */
+    overflow: hidden; /* To handle potential background animations */
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .container {
     display: flex;
-    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3); /* Add a slight overlay for better text readability */
 }
 
+/* Sidebar Styles */
 .sidebar {
-    background-color: #222;
-    color: #ddd;
+    background-color: #1e293b; /* Darker sidebar */
+    color: #cbd5e1;
     width: 250px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    position: fixed; /* Fixed sidebar */
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
     height: 100%;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
-    z-index: 10; /* Ensure it's above the content */
+    z-index: 10;
 }
 
-.logo {
+.logo a {
     font-size: 2em;
     font-weight: bold;
+    color: #a78bfa; /* Fancy logo color */
+    text-decoration: none;
     margin-bottom: 30px;
-    color: #00bcd4; /* Fancy color */
 }
 
-.sidebar nav ul {
+.toggle-menu button {
+    background-color: #334155;
+    color: #cbd5e1;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    transform: scale(1); /* Reset initial scale */
+}
+
+.toggle-menu button:hover {
+    background-color: #475569;
+    transform: scale(1.05); /* Slight scale-up on hover */
+}
+
+.follow-links {
     list-style: none;
     padding: 0;
     margin: 0;
     width: 100%;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-in-out;
 }
 
-.sidebar nav ul li {
-    margin-bottom: 15px;
+.follow-links.show-links {
+    max-height: 200px; /* Adjust as needed */
 }
 
-.sidebar nav ul li a {
-    text-decoration: none;
-    color: #ddd;
-    font-size: 1.1em;
-    transition: color 0.3s ease;
+.follow-links li a {
     display: block;
-    padding: 10px 15px;
-    border-radius: 5px;
+    color: #e0f2f7;
+    padding: 10px 0;
+    text-decoration: none;
+    border-bottom: 1px solid #4a5568;
+    transition: color 0.3s ease, transform 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translateX(0); /* Reset initial X position */
 }
 
-.sidebar nav ul li a:hover {
-    color: #00bcd4; /* Highlight on hover */
-    background-color: #333;
+.follow-links li:last-child a {
+    border-bottom: none;
 }
 
-.follow-channel {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #333;
+.follow-links li a:hover {
+    color: #a78bfa;
+    transform: translateX(5px); /* Slight slide on hover */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
     width: 100%;
 }
 
-.follow-channel h3 {
-    margin-top: 0;
-    color: #bbb;
-    font-size: 1em;
-    margin-bottom: 10px;
-}
-
-.follow-channel .button {
-    display: inline-block;
-    background-color: #4CAF50; /* Green for WhatsApp */
-    color: white;
-    padding: 10px 15px;
+nav ul li a {
+    display: block;
+    color: #cbd5e1;
+    padding: 15px 0;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    border-left: 3px solid transparent;
+    transition: border-left 0.3s ease, color 0.3s ease, transform 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translateX(0); /* Reset initial X position */
 }
 
-.follow-channel .button:hover {
-    background-color: #45a049;
+nav ul li a.active {
+    color: #a78bfa;
+    border-left-color: #a78bfa;
 }
 
+nav ul li a:hover {
+    color: #e0f2f7;
+    border-left-color: #7c3aed;
+    transform: translateX(5px); /* Slight slide on hover */
+}
+
+/* Main Content Styles */
 .content {
     flex-grow: 1;
-    padding: 20px;
-    margin-left: 250px; /* Adjust based on sidebar width */
-    transition: margin-left 0.3s ease;
+    padding: 30px;
+    margin-left: 250px; /* Match sidebar width */
+    overflow-y: auto; /* For scrollable content */
+    background-color: #1a202c; /* Slightly lighter content background */
 }
 
-.page {
-    display: none; /* Initially hide all content pages */
-    padding: 20px;
-    background-color: #292929;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.content section {
+    margin-bottom: 40px;
+}
+
+.content h1, .content h2 {
+    color: #f3f0ff; /* Fancy heading color */
     margin-bottom: 20px;
 }
 
-.page h2 {
-    color: #00bcd4;
-    margin-top: 0;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #00bcd4;
-    padding-bottom: 10px;
+.active-page {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    animation: fadeIn 0.5s ease-out; /* Keep the initial fade-in */
 }
 
-.page iframe {
-    border: none;
-    width: 100%;
-    max-width: 800px; /* Adjust as needed */
-    height: 400px; /* Adjust as needed */
-    margin-bottom: 20px;
+.hidden-page {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease-in, transform 0.3s ease-in;
 }
 
-.page p {
-    line-height: 1.6;
-    color: #ddd;
+/* Basic Animation (you can enhance this!) */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.page .button {
-    display: inline-block;
-    background-color: #00bcd4;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.page .button:hover {
-    background-color: #0097a7;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        position: static;
-        height: auto;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px;
-        box-shadow: none;
-    }
-
-    .logo {
-        margin-bottom: 0;
-    }
-
-    .sidebar nav ul {
-        display: flex;
-    }
-
-    .sidebar nav ul li {
-        margin-left: 10px;
-        margin-bottom: 0;
-    }
-
-    .sidebar nav ul li a {
-        padding: 8px 12px;
-        font-size: 0.9em;
-    }
-
-    .follow-channel {
-        margin-top: 20px;
-        padding-top: 10px;
-        border-top: 1px solid #333;
-        width: auto;
-    }
-
-    .content {
-        margin-left: 0;
-        padding-top: 70px; /* Adjust for the static sidebar */
-    }
+/* Font Awesome Icons */
+.fab, .fas {
+    margin-right: 8px;
 }
