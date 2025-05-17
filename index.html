@@ -30,9 +30,10 @@
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      border: 10px solid #1f1f1f;
-      border-top: 10px solid #00FFAB;
+      border: 10px solid #333333;       /* lighter dark border for contrast */
+      border-top: 10px solid #00FFAB;  /* bright teal-green visible */
       animation: spin 1s linear infinite;
+      will-change: transform;           /* improves animation smoothness */
     }
 
     #progressText {
@@ -310,75 +311,4 @@
         options: {
           responsive: true,
           scales: {
-            y: { beginAtZero: true, ticks: { color: '#000' } },
-            x: { ticks: { color: '#000' } },
-          },
-          plugins: {
-            legend: { labels: { color: '#000' } },
-            tooltip: {
-              backgroundColor: '#333',
-              titleColor: '#fff',
-              bodyColor: '#fff',
-            },
-          },
-        },
-      });
-    }
-
-    // GitHub stats & projects loading
-    function loadGitHubStats() {
-      // Basic user info
-      fetch('https://api.github.com/users/popkiddevs')
-        .then((res) => res.json())
-        .then((user) => {
-          document.getElementById('followers').textContent = user.followers;
-          document.getElementById('publicRepos').textContent = user.public_repos;
-        })
-        .catch(() => {
-          document.getElementById('followers').textContent = 'N/A';
-          document.getElementById('publicRepos').textContent = 'N/A';
-        });
-
-      // Repos and aggregate open issues
-      fetch('https://api.github.com/users/popkiddevs/repos?per_page=100')
-        .then((res) => res.json())
-        .then((repos) => {
-          // Calculate total open issues
-          const totalOpenIssues = repos.reduce(
-            (sum, repo) => sum + repo.open_issues_count,
-            0
-          );
-          document.getElementById('openIssues').textContent = totalOpenIssues;
-
-          // Top 5 repos by stars
-          const sorted = repos.sort(
-            (a, b) => b.stargazers_count - a.stargazers_count
-          );
-          const list = sorted
-            .slice(0, 5)
-            .map(
-              (repo) =>
-                `<li><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>: ⭐ ${repo.stargazers_count}</li>`
-            )
-            .join('');
-          document.getElementById('top-projects').innerHTML = list;
-
-          // Language usage chart
-          const langCount = {};
-          repos.forEach((repo) => {
-            if (repo.language) {
-              langCount[repo.language] = (langCount[repo.language] || 0) + 1;
-            }
-          });
-
-          const langCtx = document
-            .getElementById('langChart')
-            .getContext('2d');
-          new Chart(langCtx, {
-            type: 'pie',
-            data: {
-              labels: Object.keys(langCount),
-              datasets: [
-                {
-                  data: Object.values(langCount),
-                  backgroundColor: [
+            y: { beginAtZero: true, ticks:
