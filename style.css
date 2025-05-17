@@ -1,0 +1,185 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #181818; /* Dark background for a tech feel */
+    color: #f0f0f0; /* Light text color */
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scrollbar */
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    background-color: #222;
+    color: #ddd;
+    width: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed; /* Fixed sidebar */
+    height: 100%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 10; /* Ensure it's above the content */
+}
+
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #00bcd4; /* Fancy color */
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #ddd;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.sidebar nav ul li a:hover {
+    color: #00bcd4; /* Highlight on hover */
+    background-color: #333;
+}
+
+.follow-channel {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    width: 100%;
+}
+
+.follow-channel h3 {
+    margin-top: 0;
+    color: #bbb;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.follow-channel .button {
+    display: inline-block;
+    background-color: #4CAF50; /* Green for WhatsApp */
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.follow-channel .button:hover {
+    background-color: #45a049;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 250px; /* Adjust based on sidebar width */
+    transition: margin-left 0.3s ease;
+}
+
+.page {
+    display: none; /* Initially hide all content pages */
+    padding: 20px;
+    background-color: #292929;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.page h2 {
+    color: #00bcd4;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #00bcd4;
+    padding-bottom: 10px;
+}
+
+.page iframe {
+    border: none;
+    width: 100%;
+    max-width: 800px; /* Adjust as needed */
+    height: 400px; /* Adjust as needed */
+    margin-bottom: 20px;
+}
+
+.page p {
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.page .button {
+    display: inline-block;
+    background-color: #00bcd4;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.page .button:hover {
+    background-color: #0097a7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    .logo {
+        margin-bottom: 0;
+    }
+
+    .sidebar nav ul {
+        display: flex;
+    }
+
+    .sidebar nav ul li {
+        margin-left: 10px;
+        margin-bottom: 0;
+    }
+
+    .sidebar nav ul li a {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+
+    .follow-channel {
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 1px solid #333;
+        width: auto;
+    }
+
+    .content {
+        margin-left: 0;
+        padding-top: 70px; /* Adjust for the static sidebar */
+    }
+}
