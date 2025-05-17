@@ -159,7 +159,7 @@
         }
 
         .action-button {
-            background-color: #64ffda;
+            background-color: #a7ffe3; /* Changed button background for better text visibility */
             color: #121212;
             border: none;
             padding: 15px 30px;
@@ -176,7 +176,7 @@
         }
 
         .action-button:hover {
-            background-color: #a7ffe3;
+            background-color: #ccfff9;
             transform: scale(1.05);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
@@ -220,7 +220,7 @@
         }
 
         .next-button, .prev-button {
-            background-color: #64ffda;
+            background-color: #a7ffe3; /* Changed navigation button background for better text visibility */
             color: #121212;
             border: none;
             padding: 15px 30px;
@@ -233,7 +233,7 @@
         }
 
         .next-button:hover, .prev-button:hover {
-            background-color: #a7ffe3;
+            background-color: #ccfff9;
             transform: scale(1.08);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
@@ -375,11 +375,6 @@
             document.querySelector('.next-button').style.display = 'none';
 
             const friendsContainer = document.getElementById('page2');
-            friendsContainer.innerHTML = `
-                <div class="friend-box">
-                    <img src="https://via.placeholder.com/120/FFC107/FFFFFF?Text=Friend1" alt="Friend 1">
-                    <h3>Awesome Coder</h3>
-                </div>
-                <div class="friend-box">
-                    <img src="https://via.placeholder.com/120/4CAF50/FFFFFF?Text=TechGuru" alt="Tech Guru">
-                    <h3>Tech
+            const friends = [
+                { name: 'Friend One', imageUrl: 'https://via.placeholder.com/120/FFC107/FFFFFF?Text=FO' },
+                { name: '
