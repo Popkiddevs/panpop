@@ -8,12 +8,13 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background-color: #121212;
+            background: linear-gradient(135deg, #1c1c1c, #2e2e2e);
             color: #f0f0f0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 20px;
+            padding-top: 30px;
+            min-height: 100vh;
         }
 
         .top-bar {
@@ -21,39 +22,47 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #1e1e1e;
-            padding: 15px;
+            background: rgba(30, 30, 30, 0.9); /* Slightly transparent */
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-menu {
+            display: flex;
+            align-items: center;
         }
 
         .social-menu-toggle {
             display: flex;
             flex-direction: column;
             cursor: pointer;
+            margin-right: 20px;
         }
 
         .bar {
-            width: 25px;
+            width: 28px;
             height: 3px;
-            background-color: #f0f0f0;
-            margin: 3px 0;
+            background-color: #64ffda;
+            margin: 4px 0;
             transition: 0.4s;
+            border-radius: 2px;
         }
 
         .social-links {
             position: absolute;
-            top: 55px;
-            right: 15px;
-            background-color: #2c2c2c;
-            border-radius: 5px;
-            padding: 10px;
+            top: 60px;
+            right: 20px;
+            background: #2c2c2c;
+            border-radius: 8px;
+            padding: 15px;
             display: none;
             flex-direction: column;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            animation: slideIn 0.3s ease-out forwards;
         }
 
         .social-links.open {
@@ -61,138 +70,157 @@
         }
 
         .social-links a {
-            color: #f0f0f0;
+            color: #e0e0e0;
             text-decoration: none;
-            margin: 5px 0;
-            padding: 8px 15px;
-            border-radius: 3px;
-            transition: background-color 0.3s ease;
+            margin: 8px 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: block;
         }
 
         .social-links a:hover {
             background-color: #3a3a3a;
+            color: #64ffda;
         }
 
         .whatsapp-button {
             background-color: #25D366;
             color: #f0f0f0;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 12px 20px;
+            border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .whatsapp-button:hover {
             background-color: #128C7E;
+            transform: scale(1.05);
         }
 
         .info-container {
-            margin-top: 80px;
+            margin-top: 100px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             width: 90%;
             max-width: 1200px;
+            padding: 20px;
         }
 
         .tech-box {
-            background-color: #1e1e1e;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            width: calc(33% - 20px); /* Adjust width for responsiveness */
-            min-width: 300px;
+            background: linear-gradient(145deg, #1e1e1e, #282828);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 6px 6px 12px #1a1a1a, -6px -6px 12px #303030;
+            width: calc(33% - 25px); /* Adjust width for responsiveness */
+            min-width: 320px;
             text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .tech-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #303030;
         }
 
         .tech-box h2 {
             color: #64ffda;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
         }
 
         .tech-box p, .tech-box a {
-            color: #f0f0f0;
+            color: #e0e0e0;
             text-decoration: none;
+            line-height: 1.6;
         }
 
         .tech-box a:hover {
-            color: #64ffda;
+            color: #a7ffe3;
         }
 
         .page-navigation {
-            margin-top: 30px;
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
         }
 
-        .next-button {
+        .next-button, .prev-button {
             background-color: #64ffda;
             color: #121212;
             border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
+            padding: 15px 30px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .next-button:hover {
+        .next-button:hover, .prev-button:hover {
             background-color: #a7ffe3;
+            transform: scale(1.08);
         }
 
         .friends-page {
             display: none;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             width: 90%;
             max-width: 1200px;
-            margin-top: 80px;
-        }
-
-        .friend-box {
-            background-color: #1e1e1e;
-            border-radius: 8px;
+            margin-top: 100px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            width: calc(33% - 20px);
-            min-width: 250px;
-            text-align: center;
-        }
-
-        .friend-box img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-
-        .friend-box h3 {
-            color: #f0f0f0;
-            margin-bottom: 5px;
-        }
-
-        /* Modern and Fancy Animations (you can expand on these) */
-        .tech-box {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-
-        .tech-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
 
         .friend-box {
+            background: linear-gradient(145deg, #1e1e1e, #282828);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 6px 6px 12px #1a1a1a, -6px -6px 12px #303030;
+            width: calc(33% - 25px);
+            min-width: 280px;
+            text-align: center;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
         .friend-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #303030;
+        }
+
+        .friend-box img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .friend-box h3 {
+            color: #f0f0f0;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        /* Keyframe Animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
@@ -216,18 +244,37 @@
 
     <div class="info-container" id="page1">
         <div class="tech-box">
-            <h2>My GitHub Repository</h2>
-            <p><a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank">POPKID-XTECH</a></p>
-            <p>Check out my latest projects and contributions!</p>
-        </div>
+            <h2>About Me</h2>
+            <p>Passionate about technology and innovation.</p>
+            <p>Exploring the world of web development and beyond.</p>
         </div>
 
-    <div class="friends-page" id="page2">
+        <div class="tech-box">
+            <h2>My GitHub</h2>
+            <p><a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank">POPKID-XTECH</a></p>
+            <p>Check out my coding projects and contributions.</p>
         </div>
+
+        <div class="tech-box">
+            <h2>My Interests</h2>
+            <p>Web Development (Frontend & Backend)</p>
+            <p>Mobile App Development</p>
+            <p>Exploring new technologies and frameworks.</p>
+        </div>
+
+        <div class="tech-box">
+            <h2>Contact</h2>
+            <p>Feel free to reach out!</p>
+            <p>Connect with me via the social links above.</p>
+        </div>
+    </div>
+
+    <div class="friends-page" id="page2">
+    </div>
 
     <div class="page-navigation">
         <button class="next-button" onclick="showPage2()">Next</button>
-        <button class="next-button" onclick="showPage1()" style="display: none;" id="prevButton">Previous</button>
+        <button class="prev-button" onclick="showPage1()" style="display: none;" id="prevButton">Previous</button>
     </div>
 
     <script>
@@ -250,22 +297,33 @@
             document.getElementById('prevButton').style.display = 'inline-block';
             document.querySelector('.next-button').style.display = 'none';
 
-            // Add your friends' information here dynamically or directly in the HTML
             const friendsContainer = document.getElementById('page2');
             friendsContainer.innerHTML = `
                 <div class="friend-box">
-                    <img src="https://via.placeholder.com/80/FFC107/000000?Text=Friend1" alt="Friend 1">
-                    <h3>Friend One</h3>
+                    <img src="https://via.placeholder.com/120/FFC107/FFFFFF?Text=Friend1" alt="Friend 1">
+                    <h3>Awesome Coder</h3>
                 </div>
                 <div class="friend-box">
-                    <img src="https://via.placeholder.com/80/4CAF50/FFFFFF?Text=Friend2" alt="Friend 2">
-                    <h3>Another Pal</h3>
+                    <img src="https://via.placeholder.com/120/4CAF50/FFFFFF?Text=TechGuru" alt="Tech Guru">
+                    <h3>Tech Enthusiast</h3>
                 </div>
                 <div class="friend-box">
-                    <img src="https://via.placeholder.com/80/2196F3/FFFFFF?Text=Buddy3" alt="Buddy 3">
-                    <h3>Cool Person</h3>
+                    <img src="https://via.placeholder.com/120/2196F3/FFFFFF?Text=WebMaster" alt="Web Master">
+                    <h3>Web Development Pro</h3>
                 </div>
-                `;
+                <div class="friend-box">
+                    <img src="https://via.placeholder.com/120/9C27B0/FFFFFF?Text=DataKing" alt="Data King">
+                    <h3>Data Science Wiz</h3>
+                </div>
+                <div class="friend-box">
+                    <img src="https://via.placeholder.com/120/FF9800/FFFFFF?Text=DesignPro" alt="Design Pro">
+                    <h3>UI/UX Master</h3>
+                </div>
+                <div class="friend-box">
+                    <img src="https://via.placeholder.com/120/607D8B/FFFFFF?Text=CloudAce" alt="Cloud Ace">
+                    <h3>Cloud Computing Expert</h3>
+                </div>
+            `;
         }
     </script>
 </body>
