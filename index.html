@@ -145,11 +145,38 @@
     <h1>Welcome to POPKID XTECH</h1>
 
     <!-- Page 1 -->
-    <div class="friends-page" id="page1" style="display: flex;">
+    <div class="friends-page" id="page1" style="display: flex; flex-direction: column; align-items: center;">
       <div class="friend-box">
         <img src="https://files.catbox.moe/8a67x2.jpg" alt="popkid" />
         <h3>POPKID</h3>
         <p>Welcome to my tech space! Here you'll find cool projects, bots, and developer tools I'm working on.</p>
+      </div>
+
+      <!-- Social Links Section -->
+      <div style="margin-top: 30px; width: 100%;">
+        <h2 style="text-align:center; color:#00FFAB; margin-bottom: 20px;">Connect with Me</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+          <div class="friend-box" style="width: 220px;">
+            <h3>WhatsApp</h3>
+            <p>Chat with me instantly on WhatsApp using the QR code link.</p>
+            <button onclick="window.open('https://wa.me/qr/X27A72Q4KPHKC1', '_blank')" style="background:#25D366; color:#fff; border:none; padding:10px; border-radius:5px; cursor:pointer; width: 100%;">Open WhatsApp</button>
+          </div>
+          <div class="friend-box" style="width: 220px;">
+            <h3>TikTok</h3>
+            <p>Follow my creative videos and tech content on TikTok.</p>
+            <button onclick="window.open('https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1', '_blank')" style="background:#69C9D0; color:#fff; border:none; padding:10px; border-radius:5px; cursor:pointer; width: 100%;">Open TikTok</button>
+          </div>
+          <div class="friend-box" style="width: 220px;">
+            <h3>Instagram</h3>
+            <p>Check out my photos and stories on Instagram.</p>
+            <button onclick="window.open('https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==', '_blank')" style="background:#C13584; color:#fff; border:none; padding:10px; border-radius:5px; cursor:pointer; width: 100%;">Open Instagram</button>
+          </div>
+          <div class="friend-box" style="width: 220px;">
+            <h3>Facebook</h3>
+            <p>Connect with me on Facebook and stay updated.</p>
+            <button onclick="window.open('https://www.facebook.com/profile.php?id=100083684483339', '_blank')" style="background:#3b5998; color:#fff; border:none; padding:10px; border-radius:5px; cursor:pointer; width: 100%;">Open Facebook</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -235,218 +262,4 @@
     function showPage2() {
       document.getElementById('page1').style.display = 'none';
       document.getElementById('page2').style.display = 'flex';
-      document.getElementById('page3').style.display = 'none';
-      document.getElementById('page4').style.display = 'none';
-
-      document.getElementById('prevButton').style.display = 'inline-block';
-      document.getElementById('prevButton').onclick = showPage1;
-      document.getElementById('nextButton').style.display = 'none';
-      document.getElementById('thirdButton').style.display = 'inline-block';
-      document.getElementById('fourthButton').style.display = 'none';
-
-      const friendsContainer = document.getElementById('page2');
-      friendsContainer.innerHTML = `
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>HUSSEIN ICRAHM</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>SPARTA</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>TAYLOR</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>DAVIL XAVIER</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>DARK DEV</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>X MAN</h3></div>
-      `;
-    }
-
-    function showPage3() {
-      document.getElementById('page1').style.display = 'none';
-      document.getElementById('page2').style.display = 'none';
-      document.getElementById('page3').style.display = 'flex';
-      document.getElementById('page4').style.display = 'none';
-
-      document.getElementById('prevButton').style.display = 'inline-block';
-      document.getElementById('prevButton').onclick = showPage2;
-      document.getElementById('nextButton').style.display = 'none';
-      document.getElementById('thirdButton').style.display = 'none';
-      document.getElementById('fourthButton').style.display = 'inline-block';
-
-      if (!window.chartDrawn) {
-        drawEduChart();
-        window.chartDrawn = true;
-      }
-    }
-
-    function showPage4() {
-      document.getElementById('page1').style.display = 'none';
-      document.getElementById('page2').style.display = 'none';
-      document.getElementById('page3').style.display = 'none';
-      document.getElementById('page4').style.display = 'flex';
-
-      document.getElementById('prevButton').style.display = 'inline-block';
-      document.getElementById('prevButton').onclick = showPage3;
-      document.getElementById('nextButton').style.display = 'none';
-      document.getElementById('thirdButton').style.display = 'none';
-      document.getElementById('fourthButton').style.display = 'none';
-
-      if (!window.githubLoaded) {
-        loadGitHubStats();
-        window.githubLoaded = true;
-      }
-    }
-
-    // Education Chart
-    function drawEduChart() {
-      const ctx = document.getElementById('eduChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Primary School', 'High School', 'University'],
-          datasets: [
-            {
-              label: 'Years of Education',
-              data: [8, 4, 2],
-              backgroundColor: ['#4CAF50', '#2196F3', '#FF5722'],
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: { beginAtZero: true, ticks: { color: '#000' } },
-            x: { ticks: { color: '#000' } },
-          },
-          plugins: {
-            legend: { labels: { color: '#000' } },
-            tooltip: {
-              backgroundColor: '#333',
-              titleColor: '#fff',
-              bodyColor: '#fff',
-            },
-          },
-        },
-      });
-    }
-
-    // GitHub stats & projects loading
-    function loadGitHubStats() {
-      // Basic user info
-      fetch('https://api.github.com/users/Popkiddevs')
-        .then((res) => res.json())
-        .then((user) => {
-          document.getElementById('followers').textContent = user.followers;
-          document.getElementById('publicRepos').textContent = user.public_repos;
-        });
-
-      // Repos and aggregate open issues
-      fetch('https://api.github.com/users/Popkiddevs/repos?per_page=100')
-        .then((res) => res.json())
-        .then((repos) => {
-          // Calculate total open issues
-          const totalOpenIssues = repos.reduce(
-            (sum, repo) => sum + repo.open_issues_count,
-            0
-          );
-          document.getElementById('openIssues').textContent = totalOpenIssues;
-
-          // Top 5 repos by stars
-          const sorted = repos.sort(
-            (a, b) => b.stargazers_count - a.stargazers_count
-          );
-          const list = sorted
-            .slice(0, 5)
-            .map(
-              (repo) =>
-                `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a>: ⭐ ${repo.stargazers_count}</li>`
-            )
-            .join('');
-          document.getElementById('top-projects').innerHTML = list;
-
-          // Language usage chart
-          const langCount = {};
-          repos.forEach((repo) => {
-            if (repo.language) {
-              langCount[repo.language] = (langCount[repo.language] || 0) + 1;
-            }
-          });
-
-          const langCtx = document
-            .getElementById('langChart')
-            .getContext('2d');
-          new Chart(langCtx, {
-            type: 'pie',
-            data: {
-              labels: Object.keys(langCount),
-              datasets: [
-                {
-                  data: Object.values(langCount),
-                  backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56',
-                    '#4BC0C0',
-                    '#9966FF',
-                    '#FF9F40',
-                    '#C9CBCF',
-                  ],
-                },
-              ],
-            },
-            options: {
-              responsive: true,
-              plugins: {
-                legend: { labels: { color: '#fff' } },
-              },
-            },
-          });
-        });
-
-      // Commit activity - last 7 days
-      fetch('https://api.github.com/users/Popkiddevs/events')
-        .then((res) => res.json())
-        .then((events) => {
-          const commitsPerDay = Array(7).fill(0);
-          const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-          events.forEach((event) => {
-            if (event.type === 'PushEvent') {
-              const day = new Date(event.created_at).getDay();
-              commitsPerDay[day] += event.payload.commits.length;
-            }
-          });
-
-          const commitCtx = document
-            .getElementById('commitChart')
-            .getContext('2d');
-          new Chart(commitCtx, {
-            type: 'bar',
-            data: {
-              labels: days,
-              datasets: [
-                {
-                  label: 'Commits This Week',
-                  data: commitsPerDay,
-                  backgroundColor: '#00FFAB',
-                },
-              ],
-            },
-            options: {
-              responsive: true,
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  ticks: { color: '#fff' },
-                },
-                x: {
-                  ticks: { color: '#fff' },
-                },
-              },
-              plugins: {
-                legend: { labels: { color: '#fff' } },
-              },
-            },
-          });
-        })
-        .catch((err) => {
-          console.error('Error loading commit data:', err);
-        });
-    }
-  </script>
-</body>
-</html>
+      document
