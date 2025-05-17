@@ -1,16 +1,17 @@
-/* styles.css */
+/* fancy-styles.css */
 :root {
-    --primary-bg: #1e1e1e;
-    --secondary-bg: #2c2c2c;
-    --text-primary: #f0f0f0;
-    --accent-color: #64b5f6;
-    --success-color: #aed581;
-    --whatsapp-green: #25D366;
-    --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    --border-radius: 8px;
-    --transition-duration: 0.3s;
-    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --header-height: 60px;
+    --primary-bg: #181825; /* Darker, more modern background */
+    --secondary-bg: #282A3E; /* Slightly lighter background for boxes */
+    --text-primary: #F8F8F2; /* Light, readable text */
+    --accent-color: #8BE9FD; /* Bright cyan/aqua accent */
+    --success-color: #50FA7B; /* Green for positive elements */
+    --warning-color: #FFB86C; /* Orange/yellow for alerts */
+    --whatsapp-green: #4CAF50; /* Material Design Green */
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* More pronounced shadow */
+    --border-radius: 6px;
+    --transition-duration: 0.4s;
+    --font-family: 'Roboto Mono', monospace; /* Modern, techy font */
+    --header-height: 70px;
 }
 
 body {
@@ -26,20 +27,20 @@ body {
     transition: background-color var(--transition-duration) ease;
 }
 
-/* Header */
-.main-header {
+/* Fancy Header */
+.fancy-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--secondary-bg);
+    background-color: rgba(40, 42, 62, 0.9); /* Semi-transparent header */
     color: var(--text-primary);
-    padding: 10px 20px;
-    box-shadow: var(--box-shadow);
+    padding: 15px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     z-index: 100;
 }
 
-.header-nav {
+.fancy-header-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -48,90 +49,79 @@ body {
     margin: 0 auto;
 }
 
-.social-links {
+.fancy-social-links {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 15px;
+    gap: 20px;
     align-items: center;
 }
 
-.social-item {}
+.fancy-social-item {}
 
-.social-link {
+.fancy-social-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05); /* Subtle background */
     color: var(--text-primary);
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1.3em;
     transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease, transform 0.2s ease-in-out;
 }
 
-.social-link:hover {
+.fancy-social-link:hover {
     background-color: var(--accent-color);
     color: var(--secondary-bg);
     transform: scale(1.1);
 }
 
-.fa-whatsapp { color: #25D366; }
+.fa-whatsapp { color: #4CAF50; }
 .fa-instagram { color: #e4405f; }
 .fa-facebook-f { color: #3b5998; }
 
-.tiktok-icon {
+.fancy-tiktok-icon {
     fill: var(--text-primary);
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.6em;
+    height: 1.6em;
 }
 
-.whatsapp-channel-button {
+.fancy-whatsapp-channel-button {
     background-color: var(--whatsapp-green);
     color: var(--text-primary);
     border: none;
-    padding: 10px 15px;
+    padding: 12px 18px;
     border-radius: var(--border-radius);
     cursor: pointer;
     text-decoration: none;
     font-size: 1em;
-    transition: background-color var(--transition-duration) ease;
+    transition: background-color var(--transition-duration) ease, transform 0.2s ease-in-out;
 }
 
-.whatsapp-channel-button:hover {
-    background-color: #128C7E;
+.fancy-whatsapp-channel-button:hover {
+    background-color: #388E3C;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Main Content */
-.main-content {
+/* Fancy Main Content */
+.fancy-main-content {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    width: 85%;
+    gap: 40px;
+    width: 90%;
     max-width: 1200px;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
-.page-section {
+.fancy-page-section {
     display: none;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
 }
 
-.page-section.active {
-    display: flex;
-}
-
-.section-title {
-    color: var(--accent-color);
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    font-size: 1.8em;
-    text-align: center;
-}
-
-.section-description {
+.fancy-page-section.
