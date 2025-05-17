@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>POPKID XTECH</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
@@ -42,8 +42,12 @@
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     .container {
@@ -107,10 +111,29 @@
       background: #fff;
       border-radius: 10px;
     }
+
+    /* GitHub stats specific */
+    #github-stats {
+      max-width: 960px;
+      margin: auto;
+      background: #1f1f1f;
+      border-radius: 10px;
+      padding: 20px;
+      color: #00FFAB;
+    }
+
+    #github-stats ul {
+      list-style: none;
+      padding-left: 0;
+      color: white;
+    }
+
+    #github-stats li {
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
-
   <!-- Loader -->
   <div id="loader">
     <div class="circle"></div>
@@ -124,7 +147,7 @@
     <!-- Page 1 -->
     <div class="friends-page" id="page1" style="display: flex;">
       <div class="friend-box">
-        <img src="https://files.catbox.moe/8a67x2.jpg" alt="popkid">
+        <img src="https://files.catbox.moe/8a67x2.jpg" alt="popkid" />
         <h3>POPKID</h3>
         <p>Welcome to my tech space! Here you'll find cool projects, bots, and developer tools I'm working on.</p>
       </div>
@@ -139,9 +162,34 @@
         <h3>Education Journey</h3>
         <p><strong>Primary:</strong> Completed</p>
         <p><strong>High School:</strong> Completed</p>
-        <p><strong>University:</strong><br>Currently studying at<br><em>Masinde Muliro University of Science and Technology</em></p>
+        <p>
+          <strong>University:</strong><br />
+          Currently studying at<br />
+          <em>Masinde Muliro University of Science and Technology</em>
+        </p>
         <p><strong>Field:</strong> Technology & Innovation</p>
         <canvas id="eduChart" width="400" height="300"></canvas>
+      </div>
+    </div>
+
+    <!-- Page 4: GitHub Stats -->
+    <div class="friends-page" id="page4" style="flex-direction: column; align-items: center;">
+      <div id="github-stats">
+        <h3>GitHub Stats for Popkiddevs</h3>
+        <p>
+          <strong>Followers:</strong> <span id="followers">Loading...</span> |
+          <strong>Public Repos:</strong> <span id="publicRepos">Loading...</span> |
+          <strong>Open Issues (All repos):</strong> <span id="openIssues">Loading...</span>
+        </p>
+
+        <h4>Top 5 Projects by Stars</h4>
+        <ul id="top-projects"></ul>
+
+        <h4>Language Usage</h4>
+        <canvas id="langChart" width="400" height="300"></canvas>
+
+        <h4>Recent Weekly Commits</h4>
+        <canvas id="commitChart" width="400" height="300"></canvas>
       </div>
     </div>
 
@@ -150,6 +198,7 @@
       <button class="prev-button" onclick="showPage1()" id="prevButton" style="display: none;">Previous</button>
       <button class="next-button" onclick="showPage2()" id="nextButton">Next</button>
       <button class="next-button" onclick="showPage3()" id="thirdButton" style="display: none;">Next</button>
+      <button class="next-button" onclick="showPage4()" id="fourthButton" style="display: none;">Next</button>
     </div>
   </div>
 
@@ -170,33 +219,39 @@
       }
     }, 30); // ~3 seconds total
 
-    // Page navigation
+    // Page navigation functions
     function showPage1() {
       document.getElementById('page1').style.display = 'flex';
       document.getElementById('page2').style.display = 'none';
       document.getElementById('page3').style.display = 'none';
+      document.getElementById('page4').style.display = 'none';
+
       document.getElementById('prevButton').style.display = 'none';
       document.getElementById('nextButton').style.display = 'inline-block';
       document.getElementById('thirdButton').style.display = 'none';
+      document.getElementById('fourthButton').style.display = 'none';
     }
 
     function showPage2() {
       document.getElementById('page1').style.display = 'none';
       document.getElementById('page2').style.display = 'flex';
       document.getElementById('page3').style.display = 'none';
-      document.getElementById('prevButton').onclick = showPage1;
+      document.getElementById('page4').style.display = 'none';
+
       document.getElementById('prevButton').style.display = 'inline-block';
+      document.getElementById('prevButton').onclick = showPage1;
       document.getElementById('nextButton').style.display = 'none';
       document.getElementById('thirdButton').style.display = 'inline-block';
+      document.getElementById('fourthButton').style.display = 'none';
 
       const friendsContainer = document.getElementById('page2');
       friendsContainer.innerHTML = `
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg"><h3>HUSSEIN ICRAHM</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg"><h3>SPARTA</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg"><h3>TAYLOR</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg"><h3>DAVIL XAVIER</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg"><h3>DARK DEV</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg"><h3>X MAN</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>HUSSEIN ICRAHM</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>SPARTA</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>TAYLOR</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>DAVIL XAVIER</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>DARK DEV</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>X MAN</h3></div>
       `;
     }
 
@@ -204,45 +259,193 @@
       document.getElementById('page1').style.display = 'none';
       document.getElementById('page2').style.display = 'none';
       document.getElementById('page3').style.display = 'flex';
-      document.getElementById('prevButton').onclick = showPage2;
+      document.getElementById('page4').style.display = 'none';
+
       document.getElementById('prevButton').style.display = 'inline-block';
+      document.getElementById('prevButton').onclick = showPage2;
       document.getElementById('nextButton').style.display = 'none';
       document.getElementById('thirdButton').style.display = 'none';
+      document.getElementById('fourthButton').style.display = 'inline-block';
 
       if (!window.chartDrawn) {
-        drawChart();
+        drawEduChart();
         window.chartDrawn = true;
       }
     }
 
-    function drawChart() {
+    function showPage4() {
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page3').style.display = 'none';
+      document.getElementById('page4').style.display = 'flex';
+
+      document.getElementById('prevButton').style.display = 'inline-block';
+      document.getElementById('prevButton').onclick = showPage3;
+      document.getElementById('nextButton').style.display = 'none';
+      document.getElementById('thirdButton').style.display = 'none';
+      document.getElementById('fourthButton').style.display = 'none';
+
+      if (!window.githubLoaded) {
+        loadGitHubStats();
+        window.githubLoaded = true;
+      }
+    }
+
+    // Education Chart
+    function drawEduChart() {
       const ctx = document.getElementById('eduChart').getContext('2d');
       new Chart(ctx, {
         type: 'bar',
         data: {
           labels: ['Primary School', 'High School', 'University'],
-          datasets: [{
-            label: 'Years of Education',
-            data: [8, 4, 2],
-            backgroundColor: ['#4CAF50', '#2196F3', '#FF5722']
-          }]
+          datasets: [
+            {
+              label: 'Years of Education',
+              data: [8, 4, 2],
+              backgroundColor: ['#4CAF50', '#2196F3', '#FF5722'],
+            },
+          ],
         },
         options: {
           responsive: true,
           scales: {
             y: { beginAtZero: true, ticks: { color: '#000' } },
-            x: { ticks: { color: '#000' } }
+            x: { ticks: { color: '#000' } },
           },
           plugins: {
             legend: { labels: { color: '#000' } },
             tooltip: {
               backgroundColor: '#333',
               titleColor: '#fff',
-              bodyColor: '#fff'
-            }
-          }
-        }
+              bodyColor: '#fff',
+            },
+          },
+        },
       });
+    }
+
+    // GitHub stats & projects loading
+    function loadGitHubStats() {
+      // Basic user info
+      fetch('https://api.github.com/users/Popkiddevs')
+        .then((res) => res.json())
+        .then((user) => {
+          document.getElementById('followers').textContent = user.followers;
+          document.getElementById('publicRepos').textContent = user.public_repos;
+        });
+
+      // Repos and aggregate open issues
+      fetch('https://api.github.com/users/Popkiddevs/repos?per_page=100')
+        .then((res) => res.json())
+        .then((repos) => {
+          // Calculate total open issues
+          const totalOpenIssues = repos.reduce(
+            (sum, repo) => sum + repo.open_issues_count,
+            0
+          );
+          document.getElementById('openIssues').textContent = totalOpenIssues;
+
+          // Top 5 repos by stars
+          const sorted = repos.sort(
+            (a, b) => b.stargazers_count - a.stargazers_count
+          );
+          const list = sorted
+            .slice(0, 5)
+            .map(
+              (repo) =>
+                `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a>: ⭐ ${repo.stargazers_count}</li>`
+            )
+            .join('');
+          document.getElementById('top-projects').innerHTML = list;
+
+          // Language usage chart
+          const langCount = {};
+          repos.forEach((repo) => {
+            if (repo.language) {
+              langCount[repo.language] = (langCount[repo.language] || 0) + 1;
+            }
+          });
+
+          const langCtx = document
+            .getElementById('langChart')
+            .getContext('2d');
+          new Chart(langCtx, {
+            type: 'pie',
+            data: {
+              labels: Object.keys(langCount),
+              datasets: [
+                {
+                  data: Object.values(langCount),
+                  backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#4BC0C0',
+                    '#9966FF',
+                    '#FF9F40',
+                    '#C9CBCF',
+                  ],
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { labels: { color: '#fff' } },
+              },
+            },
+          });
+        });
+
+      // Commit activity - last 7 days
+      fetch('https://api.github.com/users/Popkiddevs/events')
+        .then((res) => res.json())
+        .then((events) => {
+          const commitsPerDay = Array(7).fill(0);
+          const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+          events.forEach((event) => {
+            if (event.type === 'PushEvent') {
+              const day = new Date(event.created_at).getDay();
+              commitsPerDay[day] += event.payload.commits.length;
+            }
+          });
+
+          const commitCtx = document
+            .getElementById('commitChart')
+            .getContext('2d');
+          new Chart(commitCtx, {
+            type: 'bar',
+            data: {
+              labels: days,
+              datasets: [
+                {
+                  label: 'Commits This Week',
+                  data: commitsPerDay,
+                  backgroundColor: '#00FFAB',
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: { color: '#fff' },
+                },
+                x: {
+                  ticks: { color: '#fff' },
+                },
+              },
+              plugins: {
+                legend: { labels: { color: '#fff' } },
+              },
+            },
+          });
+        })
+        .catch((err) => {
+          console.error('Error loading commit data:', err);
+        });
     }
   </script>
 </body>
