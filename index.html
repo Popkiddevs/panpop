@@ -377,4 +377,24 @@
             const friendsContainer = document.getElementById('page2');
             const friends = [
                 { name: 'Friend One', imageUrl: 'https://via.placeholder.com/120/FFC107/FFFFFF?Text=FO' },
-                { name: '
+                { name: 'Tech Guru', imageUrl: 'https://via.placeholder.com/120/4CAF50/FFFFFF?Text=TG' },
+                { name: 'Creative Mind', imageUrl: 'https://via.placeholder.com/120/F44336/FFFFFF?Text=CM' },
+                { name: 'Gaming Legend', imageUrl: 'https://via.placeholder.com/120/9C27B0/FFFFFF?Text=GL' },
+                { name: 'Music Maestro', imageUrl: 'https://via.placeholder.com/120/3F51B5/FFFFFF?Text=MM' },
+                { name: 'Adventure Seeker', imageUrl: 'https://via.placeholder.com/120/00BCD4/FFFFFF?Text=AS' }
+            ];
+
+            let friendsHTML = '';
+            friends.forEach(friend => {
+                friendsHTML += `
+                    <div class="friend-box">
+                        <img src="${friend.imageUrl}" alt="${friend.name}">
+                        <h3>${friend.name}</h3>
+                    </div>
+                `;
+            });
+            friendsContainer.innerHTML = friendsHTML;
+        }
+    </script>
+</body>
+</html>
