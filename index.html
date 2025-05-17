@@ -7,11 +7,37 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Inline styles for the friends page for now, will move to style.css later */
+        /* Inline styles for navigation buttons, will move to style.css later */
+        .page-nav-buttons {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 40;
+            display: flex;
+            gap: 20px;
+        }
+
+        .page-nav-buttons button {
+            background-color: #334155;
+            color: #cbd5e1;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+        }
+
+        .page-nav-buttons button:hover {
+            background-color: #475569;
+            transform: scale(1.05);
+        }
+
         .friends-page {
             position: fixed;
             top: 0;
-            right: -100%; /* Initially off-screen */
+            left: 100%; /* Initially off-screen to the right */
             width: 100%;
             height: 100%;
             background-color: #232e3c;
@@ -24,7 +50,7 @@
         }
 
         .friends-page.show {
-            transform: translateX(-100%); /* Slide into view */
+            transform: translateX(-100%); /* Slide into view from right */
         }
 
         .friend-list {
@@ -55,6 +81,14 @@
             border-bottom: 2px solid #444;
             padding-bottom: 10px;
             margin-bottom: 20px;
+        }
+
+        .main-content {
+            transition: transform 0.3s ease-in-out; /* For potential slide when friends page shows */
+        }
+
+        .main-content.slide-left {
+            transform: translateX(-50%); /* Adjust as needed */
         }
     </style>
 </head>
@@ -134,6 +168,11 @@
         </div>
     </div>
 
+    <div class="page-nav-buttons">
+        <button id="backButton"><i class="fas fa-arrow-left"></i> Back</button>
+        <button id="nextButton"><i class="fas fa-arrow-right"></i> Friends</button>
+    </div>
+
     <footer>
         <p>&copy; 2025 Popkid. All rights reserved.</p>
     </footer>
@@ -142,28 +181,22 @@
         const animatedBoxes = document.querySelectorAll('.animated-box');
         const mainContent = document.getElementById('mainContent');
         const friendsPage = document.getElementById('friendsPage');
+        const nextButton = document.getElementById('nextButton');
+        const backButton = document.getElementById('backButton');
 
-        let touchStartX = 0;
-        let touchEndX = 0;
+        let isFriendsVisible = false;
 
-        function handleSwipe() {
-            if (touchStartX - touchEndX > 50) { // Left swipe
-                friendsPage.classList.add('show');
-            } else if (touchEndX - touchStartX > 50) { // Right swipe (optional: to close)
-                friendsPage.classList.remove('show');
-            }
-            touchStartX = 0;
-            touchEndX = 0;
-        }
+        nextButton.addEventListener('click', () => {
+            friendsPage.classList.add('show');
+            mainContent.classList.add('slide-left');
+            isFriendsVisible = true;
+        });
 
-        mainContent.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].clientX;
-        }, false);
-
-        mainContent.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].clientX;
-            handleSwipe();
-        }, false);
+        backButton.addEventListener('click', () => {
+            friendsPage.classList.remove('show');
+            mainContent.classList.remove('slide-left');
+            isFriendsVisible = false;
+        });
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
