@@ -5,69 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Popkid's Digital Hub</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <aside class="sidebar">
-            <div class="logo">Popkid</div>
+            <div class="logo">
+                <a href="#">Popkid</a>
+            </div>
+            <div class="toggle-menu">
+                <button id="followToggle">
+                    <i class="fas fa-link"></i> Follow Channels
+                </button>
+                <ul class="follow-links" id="followLinks">
+                    <li><a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a></li>
+                    <li><a href="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=100083684483339" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                    <li><a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                </ul>
+            </div>
             <nav>
                 <ul>
-                    <li><a href="#instagram">Instagram</a></li>
-                    <li><a href="#facebook">Facebook</a></li>
-                    <li><a href="#tiktok">TikTok</a></li>
-                    <li><a href="#whatsapp">WhatsApp</a></li>
-                    <li><a href="#github">GitHub</a></li>
+                    <li><a href="#about" data-page="about"><i class="fas fa-user"></i> About</a></li>
+                    <li><a href="#projects" data-page="projects"><i class="fas fa-code"></i> Projects</a></li>
+                    <li><a href="#contact" data-page="contact"><i class="fas fa-envelope"></i> Contact</a></li>
                 </ul>
             </nav>
-            <div class="follow-channel">
-                <h3>Follow Channel</h3>
-                <a href="https://whatsapp.com/channel/0029VadQrNI8KMqo79BiHr3l" target="_blank" class="button">WhatsApp Channel</a>
-            </div>
         </aside>
-        <main class="content">
-            <section id="instagram" class="page">
-                <h2>Instagram</h2>
-                <iframe src="https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==&embed=true" width="100%" height="500" frameborder="0" scrolling="yes"></iframe>
+        <main class="content" id="mainContent">
+            <section id="home" class="active-page">
+                <h1>Welcome to Popkid's Universe!</h1>
+                <p>Explore my digital world and connect with me on various platforms.</p>
             </section>
-            <section id="facebook" class="page">
-                <h2>Facebook</h2>
-                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100083684483339&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            <section id="about" class="hidden-page">
+                <h2>About Me</h2>
+                <p>This is where you can share information about yourself, your interests, and your journey.</p>
             </section>
-            <section id="tiktok" class="page">
-                <h2>TikTok</h2>
-                <iframe src="https://www.tiktok.com/embed/7367877538881870086" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
-                <p><a href="https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1" target="_blank">Visit my TikTok profile</a></p>
+            <section id="projects" class="hidden-page">
+                <h2>Projects</h2>
+                <p>Showcase your awesome projects and creations here. Link to demos or repositories.</p>
             </section>
-            <section id="whatsapp" class="page">
-                <h2>WhatsApp</h2>
-                <p>Connect with me on WhatsApp:</p>
-                <a href="https://wa.me/qr/X27A72Q4KPHKC1" target="_blank" class="button">Chat on WhatsApp</a>
-            </section>
-            <section id="github" class="page">
-                <h2>GitHub</h2>
-                <p>Check out my projects on GitHub:</p>
-                <a href="https://GitHub.com/Popkiddevs/POPKID-XTECH" target="_blank" class="button">POPKID-XTECH Repository</a>
+            <section id="contact" class="hidden-page">
+                <h2>Contact Me</h2>
+                <p>Provide ways for people to get in touch with you.</p>
             </section>
         </main>
     </div>
 
     <script>
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+        const followToggle = document.getElementById('followToggle');
+        const followLinks = document.getElementById('followLinks');
+        const navLinks = document.querySelectorAll('nav a');
+        const contentSections = document.querySelectorAll('.content > section');
 
-                document.querySelectorAll('.page').forEach(page => {
-                    page.style.display = 'none';
+        followToggle.addEventListener('click', () => {
+            followLinks.classList.toggle('show-links');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const pageId = link.getAttribute('data-page');
+
+                contentSections.forEach(section => {
+                    section.classList.remove('active-page');
+                    section.classList.add('hidden-page');
                 });
 
-                document.querySelector(this.getAttribute('href')).style.display = 'block';
+                const targetSection = document.getElementById(pageId);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden-page');
+                    targetSection.classList.add('active-page');
+                }
+
+                // Remove active class from other links and add to the current one
+                navLinks.forEach(navLink => navLink.classList.remove('active'));
+                link.classList.add('active');
             });
         });
 
-        // Initially show the first section (e.g., Instagram)
-        if (document.querySelector('.page')) {
-            document.querySelector('.page').style.display = 'block';
-        }
+        // Set 'Home' as active on initial load (if you want)
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstNavLink = document.querySelector('nav a[data-page="about"]'); // Changed to 'about' as there's no 'home' link
+            if (firstNavLink) {
+                firstNavLink.classList.add('active');
+                document.getElementById('about').classList.remove('hidden-page');
+                document.getElementById('about').classList.add('active-page');
+            }
+        });
     </script>
 </body>
 </html>
