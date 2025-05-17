@@ -30,10 +30,9 @@
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      border: 10px solid #333333;       /* lighter dark border for contrast */
-      border-top: 10px solid #00FFAB;  /* bright teal-green visible */
+      border: 10px solid #1f1f1f;
+      border-top: 10px solid #00FFAB;
       animation: spin 1s linear infinite;
-      will-change: transform;           /* improves animation smoothness */
     }
 
     #progressText {
@@ -101,7 +100,6 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-weight: bold;
     }
 
     .page-navigation button:hover {
@@ -162,14 +160,14 @@
     <div class="friends-page" id="page3">
       <div class="friend-box" style="width: 100%;">
         <h3>Education Journey</h3>
-        <p><strong>Primary School:</strong> Completed</p>
+        <p><strong>Primary:</strong> Completed</p>
         <p><strong>High School:</strong> Completed</p>
         <p>
           <strong>University:</strong><br />
           Currently studying at<br />
           <em>Masinde Muliro University of Science and Technology</em>
         </p>
-        <p><strong>Field of Study:</strong> Technology & Innovation</p>
+        <p><strong>Field:</strong> Technology & Innovation</p>
         <canvas id="eduChart" width="400" height="300"></canvas>
       </div>
     </div>
@@ -177,7 +175,7 @@
     <!-- Page 4: GitHub Stats -->
     <div class="friends-page" id="page4" style="flex-direction: column; align-items: center;">
       <div id="github-stats">
-        <h3>GitHub Stats for popkiddevs</h3>
+        <h3>GitHub Stats for Popkiddevs</h3>
         <p>
           <strong>Followers:</strong> <span id="followers">Loading...</span> |
           <strong>Public Repos:</strong> <span id="publicRepos">Loading...</span> |
@@ -248,12 +246,12 @@
 
       const friendsContainer = document.getElementById('page2');
       friendsContainer.innerHTML = `
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" alt="HUSSEIN ICRAHM" /><h3>HUSSEIN ICRAHM</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" alt="SPARTA" /><h3>SPARTA</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" alt="TAYLOR" /><h3>TAYLOR</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" alt="DAVIL XAVIER" /><h3>DAVIL XAVIER</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" alt="DARK DEV" /><h3>DARK DEV</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" alt="X MAN" /><h3>X MAN</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>HUSSEIN ICRAHM</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>SPARTA</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>TAYLOR</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>DAVIL XAVIER</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>DARK DEV</h3></div>
+        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>X MAN</h3></div>
       `;
     }
 
@@ -303,7 +301,7 @@
           datasets: [
             {
               label: 'Years of Education',
-              data: [8, 4, 3],
+              data: [8, 4, 2],
               backgroundColor: ['#4CAF50', '#2196F3', '#FF5722'],
             },
           ],
@@ -311,4 +309,144 @@
         options: {
           responsive: true,
           scales: {
-            y: { beginAtZero: true, ticks:
+            y: { beginAtZero: true, ticks: { color: '#000' } },
+            x: { ticks: { color: '#000' } },
+          },
+          plugins: {
+            legend: { labels: { color: '#000' } },
+            tooltip: {
+              backgroundColor: '#333',
+              titleColor: '#fff',
+              bodyColor: '#fff',
+            },
+          },
+        },
+      });
+    }
+
+    // GitHub stats & projects loading
+    function loadGitHubStats() {
+      // Basic user info
+      fetch('https://api.github.com/users/Popkiddevs')
+        .then((res) => res.json())
+        .then((user) => {
+          document.getElementById('followers').textContent = user.followers;
+          document.getElementById('publicRepos').textContent = user.public_repos;
+        });
+
+      // Repos and aggregate open issues
+      fetch('https://api.github.com/users/Popkiddevs/repos?per_page=100')
+        .then((res) => res.json())
+        .then((repos) => {
+          // Calculate total open issues
+          const totalOpenIssues = repos.reduce(
+            (sum, repo) => sum + repo.open_issues_count,
+            0
+          );
+          document.getElementById('openIssues').textContent = totalOpenIssues;
+
+          // Top 5 repos by stars
+          const sorted = repos.sort(
+            (a, b) => b.stargazers_count - a.stargazers_count
+          );
+          const list = sorted
+            .slice(0, 5)
+            .map(
+              (repo) =>
+                `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a>: ⭐ ${repo.stargazers_count}</li>`
+            )
+            .join('');
+          document.getElementById('top-projects').innerHTML = list;
+
+          // Language usage chart
+          const langCount = {};
+          repos.forEach((repo) => {
+            if (repo.language) {
+              langCount[repo.language] = (langCount[repo.language] || 0) + 1;
+            }
+          });
+
+          const langCtx = document
+            .getElementById('langChart')
+            .getContext('2d');
+          new Chart(langCtx, {
+            type: 'pie',
+            data: {
+              labels: Object.keys(langCount),
+              datasets: [
+                {
+                  data: Object.values(langCount),
+                  backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#4BC0C0',
+                    '#9966FF',
+                    '#FF9F40',
+                    '#C9CBCF',
+                  ],
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { labels: { color: '#fff' } },
+              },
+            },
+          });
+        });
+
+      // Commit activity - last 7 days
+      fetch('https://api.github.com/users/Popkiddevs/events')
+        .then((res) => res.json())
+        .then((events) => {
+          const commitsPerDay = Array(7).fill(0);
+          const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+          events.forEach((event) => {
+            if (event.type === 'PushEvent') {
+              const day = new Date(event.created_at).getDay();
+              commitsPerDay[day] += event.payload.commits.length;
+            }
+          });
+
+          const commitCtx = document
+            .getElementById('commitChart')
+            .getContext('2d');
+          new Chart(commitCtx, {
+            type: 'bar',
+            data: {
+              labels: days,
+              datasets: [
+                {
+                  label: 'Commits This Week',
+                  data: commitsPerDay,
+                  backgroundColor: '#00FFAB',
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: { color: '#fff' },
+                },
+                x: {
+                  ticks: { color: '#fff' },
+                },
+              },
+              plugins: {
+                legend: { labels: { color: '#fff' } },
+              },
+            },
+          });
+        })
+        .catch((err) => {
+          console.error('Error loading commit data:', err);
+        });
+    }
+  </script>
+</body>
+</html>
