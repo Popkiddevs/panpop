@@ -22,7 +22,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(30, 30, 30, 0.9); /* Slightly transparent */
+            background: rgba(30, 30, 30, 0.9);
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
@@ -41,6 +41,11 @@
             flex-direction: column;
             cursor: pointer;
             margin-right: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-menu-toggle.open {
+            transform: rotate(90deg);
         }
 
         .bar {
@@ -48,8 +53,12 @@
             height: 3px;
             background-color: #64ffda;
             margin: 4px 0;
-            transition: 0.4s;
             border-radius: 2px;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-menu-toggle.open .bar {
+            background-color: #a7ffe3;
         }
 
         .social-links {
@@ -118,7 +127,7 @@
             border-radius: 12px;
             padding: 25px;
             box-shadow: 6px 6px 12px #1a1a1a, -6px -6px 12px #303030;
-            width: calc(33% - 25px); /* Adjust width for responsiveness */
+            width: calc(33% - 25px);
             min-width: 320px;
             text-align: center;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -279,7 +288,10 @@
 
     <script>
         function toggleSocialMenu() {
-            document.querySelector('.social-links').classList.toggle('open');
+            const toggle = document.querySelector('.social-menu-toggle');
+            const links = document.querySelector('.social-links');
+            toggle.classList.toggle('open');
+            links.classList.toggle('open');
         }
 
         function showPage1() {
