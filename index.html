@@ -1,391 +1,458 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>POPKID XTECH</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: white;
-      margin: 0;
-      padding: 0;
-    }
-
-    .container {
-      padding: 20px;
-      max-width: 960px;
-      margin: auto;
-      display: block; /* Changed from 'none' to 'block' */
-    }
-
-    h1 {
-      color: #00FFAB;
-      text-align: center;
-    }
-
-    .friends-page {
-      display: none;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    .friend-box {
-      background: #1f1f1f;
-      border: 1px solid #333;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      width: 260px;
-    }
-
-    .friend-box img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 10px;
-    }
-
-    .page-navigation {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .page-navigation button {
-      padding: 10px 20px;
-      margin: 0 10px;
-      background-color: #00FFAB;
-      color: #121212;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .page-navigation button:hover {
-      background-color: #00cc8f;
-    }
-
-    canvas {
-      margin-top: 20px;
-      background: #fff;
-      border-radius: 10px;
-    }
-
-    /* GitHub stats specific */
-    #github-stats {
-      max-width: 960px;
-      margin: auto;
-      background: #1f1f1f;
-      border-radius: 10px;
-      padding: 20px;
-      color: #00FFAB;
-    }
-
-    #github-stats ul {
-      list-style: none;
-      padding-left: 0;
-      color: white;
-    }
-
-    #github-stats li {
-      margin-bottom: 8px;
-    }
-
-    .social-box {
-      background: #1f1f1f;
-      border: 1px solid #333;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      width: 260px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .social-box img {
-      width: 80px;
-      height: 80px;
-      border-radius: 0;
-      object-fit: cover;
-      margin-bottom: 10px;
-    }
-
-    .social-box p {
-      margin-bottom: 15px;
-      color: #eee;
-    }
-
-    .social-box button {
-      padding: 10px 20px;
-      background-color: #00FFAB;
-      color: #121212;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .social-box button:hover {
-      background-color: #00cc8f;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Welcome to POPKID XTECH</h1>
-
-    <div class="friends-page" id="page1" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;">
-      <div class="friend-box">
-        <img src="https://files.catbox.moe/8a67x2.jpg" alt="popkid" />
-        <h3>POPKID</h3>
-        <p>Welcome to my tech space! Here you'll find cool projects, bots, and developer tools I'm working on.</p>
-      </div>
-      <div class="social-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp" style="border-radius: 0; width: 80px; height: 80px;">
-        <p>Chat with me directly on WhatsApp for quick questions or collaborations.</p>
-        <button onclick="window.open('https://wa.me/qr/X27A72Q4KPHKC1', '_blank')">WhatsApp</button>
-      </div>
-      <div class="social-box">
-        <img src="https://img.icons8.com/?size=100&id=hf1tCYT3bFBL&format=png&color=000000" alt="TikTok" style="border-radius: 0; width: 80px; height: 80px;">
-        <p>Catch my latest tech snippets and creative content on TikTok!</p>
-        <button onclick="window.open('https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1', '_blank')">TikTok</button>
-      </div>
-      <div class="social-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1395px-Instagram_logo_2016.svg.png" alt="Instagram" style="border-radius: 0; width: 80px; height: 80px;">
-        <p>Follow me on Instagram for behind-the-scenes glimpses and more!</p>
-        <button onclick="window.open('https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==', '_blank')">Instagram</button>
-      </div>
-      <div class="social-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook" style="border-radius: 0; width: 80px; height: 80px;">
-        <p>Connect with me on Facebook for updates and broader discussions.</p>
-        <button onclick="window.open('https://www.facebook.com/profile.php?id=100083684483339', '_blank')">Facebook</button>
-      </div>
-    </div>
-
-    <div class="friends-page" id="page2"></div>
-
-    <div class="friends-page" id="page3">
-      <div class="friend-box" style="width: 100%;">
-        <h3>Education Journey</h3>
-        <p><strong>Primary:</strong> Completed</p>
-        <p><strong>High School:</strong> Completed</p>
-        <p>
-          <strong>University:</strong><br />
-          Currently studying at<br />
-          <em>Masinde Muliro University of Science and Technology</em>
-        </p>
-        <p><strong>Field:</strong> Technology & Innovation</p>
-        <canvas id="eduChart" width="400" height="300"></canvas>
-      </div>
-    </div>
-
-    <div class="friends-page" id="page4" style="flex-direction: column; align-items: center;">
-      <div id="github-stats">
-        <h3>GitHub Stats for Popkiddevs</h3>
-        <p>
-          <strong>Followers:</strong> <span id="followers">Loading...</span> |
-          <strong>Public Repos:</strong> <span id="publicRepos">Loading...</span> |
-          <strong>Open Issues (All repos):</strong> <span id="openIssues">Loading...</span>
-        </p>
-
-        <h4>Top 5 Projects by Stars</h4>
-        <ul id="top-projects"></ul>
-
-        <h4>Language Usage</h4>
-        <canvas id="langChart" width="400" height="300"></canvas>
-
-        <h4>Recent Weekly Commits</h4>
-        <canvas id="commitChart" width="400" height="300"></canvas>
-      </div>
-    </div>
-
-    <div class="page-navigation">
-      <button class="prev-button" onclick="showPage1()" id="prevButton" style="display: none;">Previous</button>
-      <button class="next-button" onclick="showPage2()" id="nextButton" style="display: inline-block;">Next</button>
-      <button class="next-button" onclick="showPage3()" id="thirdButton" style="display: none;">Next</button>
-      <button class="next-button" onclick="showPage4()" id="fourthButton" style="display: none;">Next</button>
-    </div>
-  </div>
-
-  <script>
-    function showPage1() {
-      document.getElementById('page1').style.display = 'flex';
-      document.getElementById('page2').style.display = 'none';
-      document.getElementById('page3').style.display = 'none';
-      document.getElementById('page4').style.display = 'none';
-
-      document.getElementById('prevButton').style.display = 'none';
-      document.getElementById('nextButton').style.display = 'inline-block';
-      document.getElementById('thirdButton').style.display = 'none';
-      document.getElementById('fourthButton').style.display = 'none';
-    }
-
-    function showPage2() {
-      document.getElementById('page1').style.display = 'none';
-      document.getElementById('page2').style.display = 'flex';
-      document.getElementById('page3').style.display = 'none';
-      document.getElementById('page4').style.display = 'none';
-
-      document.getElementById('prevButton').style.display = 'inline-block';
-      document.getElementById('prevButton').onclick = showPage1;
-      document.getElementById('nextButton').style.display = 'none';
-      document.getElementById('thirdButton').style.display = 'inline-block';
-      document.getElementById('fourthButton').style.display = 'none';
-
-      const friendsContainer = document.getElementById('page2');
-      friendsContainer.innerHTML = `
-        <div class="friend-box"><img src="https://files.catbox.moe/s5ibvh.jpg" /><h3>HUSSEIN ICRAHM</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>SPARTA</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>TAYLOR</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>DAVIL XAVIER</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>DARK DEV</h3></div>
-        <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>X MAN</h3></div>
-      `;
-    }
-
-    function showPage3() {
-      document.getElementById('page1').style.display = 'none';
-      document.getElementById('page2').style.display = 'none';
-      document.getElementById('page3').style.display = 'flex';
-      document.getElementById('page4').style.display = 'none';
-
-      document.getElementById('prevButton').style.display = 'inline-block';
-      document.getElementById('prevButton').onclick = showPage2;
-      document.getElementById('nextButton').style.display = 'none';
-      document.getElementById('thirdButton').style.display = 'none';
-      document.getElementById('fourthButton').style.display = 'inline-block';
-
-      if (!window.chartDrawn) {
-        drawEduChart();
-        window.chartDrawn = true;
-      }
-    }
-
-    function showPage4() {
-      document.getElementById('page1').style.display = 'none';
-      document.getElementById('page2').style.display = 'none';
-      document.getElementById('page3').style.display = 'none';
-      document.getElementById('page4').style.display = 'flex';
-
-      document.getElementById('prevButton').style.display = 'inline-block';
-      document.getElementById('prevButton').onclick = showPage3;
-      document.getElementById('nextButton').style.display = 'none';
-      document.getElementById('thirdButton').style.display = 'none';
-      document.getElementById('fourthButton').style.display = 'none';
-
-      if (!window.githubLoaded) {
-        loadGitHubStats();
-        window.githubLoaded = true;
-      }
-    }
-
-    // Education Chart
-    function drawEduChart() {
-      const ctx = document.getElementById('eduChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Primary School', 'High School', 'University'],
-          datasets: [
-            {
-              label: 'Years of Education',
-              data: [8, 4, 2],
-              backgroundColor: ['#4CAF50', '#2196F3', '#FF5722'],
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: { beginAtZero: true, ticks: { color: '#000' } },
-            x: { ticks: { color: '#000' } },
-          },
-          plugins: {
-            legend: { labels: { color: '#000' } },
-            tooltip: {
-              backgroundColor: '#333',
-              titleColor: '#fff',
-              bodyColor: '#fff',
-            },
-          },
-        },
-      });
-    }
-
-    // GitHub stats & projects loading
-    function loadGitHubStats() {
-      // Basic user info
-      fetch('https://api.github.com/users/Popkiddevs')
-        .then((res) => res.json())
-        .then((user) => {
-          document.getElementById('followers').textContent = user.followers;
-          document.getElementById('publicRepos').textContent = user.public_repos;
-        });
-
-      // Repos and aggregate open issues
-      fetch('https://api.github.com/users/Popkiddevs/repos?per_page=100')
-        .then((res) => res.json())
-        .then((repos) => {
-          // Calculate total open issues
-          const totalOpenIssues = repos.reduce(
-            (sum, repo) => sum + repo.open_issues_count,
-            0
-          );
-          document.getElementById('openIssues').textContent = totalOpenIssues;
-
-          // Top 5 repos by stars
-          const sorted = repos.sort(
-            (a, b) => b.stargazers_count - a.stargazers_count
-          );
-          const list = sorted
-            .slice(0, 5)
-            .map(
-              (repo) =>
-                `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a>: ⭐ ${repo.stargazers_count}</li>`
-            )
-            .join('');
-          document.getElementById('top-projects').innerHTML = list;
-
-          // Language usage chart
-          const langCount = {};
-          repos.forEach((repo) => {
-            if (repo.language) {
-              langCount[repo.language] = (langCount[repo.language] || 0) + 1;
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <title>POPKID XTECH</title>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              background: #121212;
+              color: white;
+              margin: 0;
+              padding: 0;
             }
-          });
 
-          const langCtx = document
-            .getElementById('langChart')
-            .getContext('2d');
-          new Chart(langCtx, {
-            type: 'pie',
-            data: {
-              labels: Object.keys(langCount),
-              datasets: [
-                {
-                  data: Object.values(langCount),
-                  backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56',
-                    '#4BC0C0',
-                    '#9966FF',
-                    '#FF9F40',
-                    '#C9CBCF',
+            .container {
+              padding: 20px;
+              max-width: 960px;
+              margin: auto;
+              display: block; /* Changed from 'none' to 'block' */
+            }
+
+            h1 {
+              color: #00FFAB;
+              text-align: center;
+            }
+
+            .friends-page {
+              display: none;
+              flex-wrap: wrap;
+              gap: 20px;
+              justify-content: center;
+              margin-top: 20px;
+            }
+
+            .friend-box {
+              background: #1f1f1f;
+              border: 1px solid #333;
+              padding: 20px;
+              border-radius: 10px;
+              text-align: center;
+              width: 260px;
+            }
+
+            .friend-box img {
+              width: 120px;
+              height: 120px;
+              border-radius: 50%;
+              object-fit: cover;
+              margin-bottom: 10px;
+            }
+
+            .page-navigation {
+              text-align: center;
+              margin-top: 20px;
+            }
+
+            .page-navigation button {
+              padding: 10px 20px;
+              margin: 0 10px;
+              background-color: #00FFAB;
+              color: #121212;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+            }
+
+            .page-navigation button:hover {
+              background-color: #00cc8f;
+            }
+
+            canvas {
+              margin-top: 20px;
+              background: #fff;
+              border-radius: 10px;
+            }
+
+            /* GitHub stats specific */
+            #github-stats {
+              max-width: 960px;
+              margin: auto;
+              background: #1f1f1f;
+              border-radius: 10px;
+              padding: 20px;
+              color: #00FFAB;
+            }
+
+            #github-stats ul {
+              list-style: none;
+              padding-left: 0;
+              color: white;
+            }
+
+            #github-stats li {
+              margin-bottom: 8px;
+            }
+
+            .social-box {
+              background: #1f1f1f;
+              border: 1px solid #333;
+              padding: 20px;
+              border-radius: 10px;
+              text-align: center;
+              width: 260px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
+
+            .social-box img {
+              width: 80px;
+              height: 80px;
+              border-radius: 0;
+              object-fit: cover;
+              margin-bottom: 10px;
+            }
+
+            .social-box p {
+              margin-bottom: 15px;
+              color: #eee;
+            }
+
+            .social-box button {
+              padding: 10px 20px;
+              background-color: #00FFAB;
+              color: #121212;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+              font-size: 16px;
+            }
+
+            .social-box button:hover {
+              background-color: #00cc8f;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h1>Welcome to POPKID XTECH</h1>
+
+            <div class="friends-page" id="page1" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;">
+              <div class="friend-box">
+                <img src="https://files.catbox.moe/8a67x2.jpg" alt="popkid" />
+                <h3>POPKID</h3>
+                <p>Welcome to my tech space! Here you'll find cool projects, bots, and developer tools I'm working on.</p>
+              </div>
+              <div class="social-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp" style="border-radius: 0; width: 80px; height: 80px;">
+                <p>Chat with me directly on WhatsApp for quick questions or collaborations.</p>
+                <button onclick="window.open('https://wa.me/qr/X27A72Q4KPHKC1', '_blank')">WhatsApp</button>
+              </div>
+              <div class="social-box">
+                <img src="https://img.icons8.com/?size=100&id=hf1tCYT3bFBL&format=png&color=000000" alt="TikTok" style="border-radius: 0; width: 80px; height: 80px;">
+                <p>Catch my latest tech snippets and creative content on TikTok!</p>
+                <button onclick="window.open('https://www.tiktok.com/@pop_kid254?_t=ZM-8wQirRrBp1a&_r=1', '_blank')">TikTok</button>
+              </div>
+              <div class="social-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1395px-Instagram_logo_2016.svg.png" alt="Instagram" style="border-radius: 0; width: 80px; height: 80px;">
+                <p>Follow me on Instagram for behind-the-scenes glimpses and more!</p>
+                <button onclick="window.open('https://www.instagram.com/popkid_ke?igsh=MXVkOWhhbGdqenVkYw==', '_blank')">Instagram</button>
+              </div>
+              <div class="social-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook" style="border-radius: 0; width: 80px; height: 80px;">
+                <p>Connect with me on Facebook for updates and broader discussions.</p>
+                <button onclick="window.open('https://www.facebook.com/profile.php?id=100083684483339', '_blank')">Facebook</button>
+              </div>
+            </div>
+
+            <div class="friends-page" id="page2"></div>
+
+            <div class="friends-page" id="page3">
+              <div class="friend-box" style="width: 100%;">
+                <h3>Education Journey</h3>
+                <p><strong>Primary:</strong> Completed</p>
+                <p><strong>High School:</strong> Completed</p>
+                <p>
+                  <strong>University:</strong><br />
+                  Currently studying at<br />
+                  <em>Masinde Muliro University of Science and Technology</em>
+                </p>
+                <p><strong>Field:</strong> Technology & Innovation</p>
+                <canvas id="eduChart" width="400" height="300"></canvas>
+              </div>
+            </div>
+
+            <div class="friends-page" id="page4" style="flex-direction: column; align-items: center;">
+              <div id="github-stats">
+                <h3>GitHub Stats for Popkiddevs</h3>
+                <p>
+                  <strong>Followers:</strong> <span id="followers">Loading...</span> |
+                  <strong>Public Repos:</strong> <span id="publicRepos">Loading...</span> |
+                  <strong>Open Issues (All repos):</strong> <span id="openIssues">Loading...</span>
+                </p>
+
+                <h4>Top 5 Projects by Stars</h4>
+                <ul id="top-projects"></ul>
+
+                <h4>Language Usage</h4>
+                <canvas id="langChart" width="400" height="300"></canvas>
+
+                <h4>Recent Weekly Commits</h4>
+                <canvas id="commitChart" width="400" height="300"></canvas>
+              </div>
+            </div>
+
+            <div class="page-navigation">
+              <button class="prev-button" onclick="showPage1()" id="prevButton" style="display: none;">Previous</button>
+              <button class="next-button" onclick="showPage2()" id="nextButton">Next</button>
+              <button class="next-button" onclick="showPage3()" id="thirdButton" style="display: none;">Next</button>
+              <button class="next-button" onclick="showPage4()" id="fourthButton" style="display: none;">Next</button>
+            </div>
+          </div>
+
+          <script>
+            function showPage1() {
+              document.getElementById('page1').style.display = 'flex';
+              document.getElementById('page2').style.display = 'none';
+              document.getElementById('page3').style.display = 'none';
+              document.getElementById('page4').style.display = 'none';
+
+              document.getElementById('prevButton').style.display = 'none';
+              document.getElementById('nextButton').style.display = 'inline-block';
+              document.getElementById('thirdButton').style.display = 'none';
+              document.getElementById('fourthButton').style.display = 'none';
+            }
+
+            function showPage2() {
+               document.getElementById('page1').style.display = 'none';
+              document.getElementById('page2').style.display = 'flex';
+              document.getElementById('page3').style.display = 'none';
+              document.getElementById('page4').style.display = 'none';
+
+              document.getElementById('prevButton').style.display = 'inline-block';
+              document.getElementById('prevButton').onclick = showPage1;
+              document.getElementById('nextButton').style.display = 'none';
+               document.getElementById('thirdButton').style.display = 'inline-block';
+              document.getElementById('fourthButton').style.display = 'none';
+
+              const friendsContainer = document.getElementById('page2');
+              friendsContainer.innerHTML = `
+                <div class="friend-box"><img src="https://files.catbox.moe/s5ibvh.jpg" /><h3>HUSSEIN ICRAHM</h3></div>
+                <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>SPARTA</h3></div>
+                <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>TAYLOR</h3></div>
+                <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>DAVIL XAVIER</h3></div>
+                <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>DARK DEV</h3></div>
+                <div class="friend-box"><img src="https://files.catbox.moe/8a67x2.jpg" /><h3>X MAN</h3></div>
+              `;
+            }
+
+            function showPage3() {
+              document.getElementById('page1').style.display = 'none';
+              document.getElementById('page2').style.display = 'none';
+              document.getElementById('page3').style.display = 'flex';
+              document.getElementById('page4').style.display = 'none';
+
+              document.getElementById('prevButton').style.display = 'inline-block';
+              document.getElementById('prevButton').onclick = showPage2;
+              document.getElementById('nextButton').style.display = 'none';
+              document.getElementById('thirdButton').style.display = 'none';
+              document.getElementById('fourthButton').style.display = 'inline-block';
+
+              if (!window.chartDrawn) {
+                drawEduChart();
+                window.chartDrawn = true;
+              }
+            }
+
+            function showPage4() {
+              document.getElementById('page1').style.display = 'none';
+              document.getElementById('page2').style.display = 'none';
+              document.getElementById('page3').style.display = 'none';
+              document.getElementById('page4').style.display = 'flex';
+
+              document.getElementById('prevButton').style.display = 'inline-block';
+              document.getElementById('prevButton').onclick = showPage3;
+              document.getElementById('nextButton').style.display = 'none';
+              document.getElementById('thirdButton').style.display = 'none';
+              document.getElementById('fourthButton').style.display = 'none';
+
+              if (!window.githubLoaded) {
+                loadGitHubStats();
+                window.githubLoaded = true;
+              }
+            }
+
+            // Education Chart
+            function drawEduChart() {
+              const ctx = document.getElementById('eduChart').getContext('2d');
+              new Chart(ctx, {
+                type: 'bar',
+                data: {
+                  labels: ['Primary School', 'High School', 'University'],
+                  datasets: [
+                    {
+                      label: 'Years of Education',
+                      data: [8, 4, 2],
+                      backgroundColor: ['#4CAF50', '#2196F3', '#FF5722'],
+                    },
                   ],
                 },
-              ],
-            },
-            options: {
-              responsive: true,
-              plugins: {
-                legend: { position: 'right', labels: { color: '#000' } },
-                tooltip: {
-                  backgroundColor: '#333',
-                  titleColor: '#fff
+                options: {
+                  responsive: true,
+                  scales: {
+                    y: { beginAtZero: true, ticks: { color: '#000' } },
+                    x: { ticks: { color: '#000' } },
+                  },
+                  plugins: {
+                    legend: { labels: { color: '#000' } },
+                    tooltip: {
+                      backgroundColor: '#333',
+                      titleColor: '#fff',
+                      bodyColor: '#fff',
+                    },
+                  },
+                },
+              });
+            }
+
+            // GitHub stats & projects loading
+            function loadGitHubStats() {
+              // Basic user info
+              fetch('https://api.github.com/users/Popkiddevs')
+                .then((res) => res.json())
+                .then((user) => {
+                  document.getElementById('followers').textContent = user.followers;
+                  document.getElementById('publicRepos').textContent = user.public_repos;
+                });
+
+              // Repos and aggregate open issues
+              fetch('https://api.github.com/users/Popkiddevs/repos?per_page=100')
+                .then((res) => res.json())
+                .then((repos) => {
+                  // Calculate total open issues
+                  const totalOpenIssues = repos.reduce(
+                    (sum, repo) => sum + repo.open_issues_count,
+                    0
+                  );
+                  document.getElementById('openIssues').textContent = totalOpenIssues;
+
+                  // Top 5 repos by stars
+                  const sorted = repos.sort(
+                    (a, b) => b.stargazers_count - a.stargazers_count
+                  );
+                  const list = sorted
+                    .slice(0, 5)
+                    .map(
+                      (repo) =>
+                        `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a>: ⭐ ${repo.stargazers_count}</li>`
+                    )
+                    .join('');
+                  document.getElementById('top-projects').innerHTML = list;
+
+                  // Language usage chart
+                  const langCount = {};
+                  repos.forEach((repo) => {
+                    if (repo.language) {
+                      langCount[repo.language] = (langCount[repo.language] || 0) + 1;
+                    }
+                  });
+
+                  const langCtx = document
+                    .getElementById('langChart')
+                    .getContext('2d');
+                  new Chart(langCtx, {
+                    type: 'pie',
+                    data: {
+                      labels: Object.keys(langCount),
+                      datasets: [
+                        {
+                          data: Object.values(langCount),
+                          backgroundColor: [
+                            '#FF6384',
+                            '#36A2EB',
+                            '#FFCE56',
+                            '#4BC0C0',
+                            '#9966FF',
+                            '#FF9F40',
+                            '#C9CBCF',
+                          ],
+                        },
+                      ],
+                    },
+                    options: {
+                      responsive: true,
+                      plugins: {
+                        legend: { position: 'right', labels: { color: '#000' } },
+                        tooltip: {
+                          backgroundColor: '#333',
+                          titleColor: '#fff',
+                          bodyColor: '#fff',
+                        },
+                      },
+                    },
+                  });
+                });
+
+              // Weekly Commits Chart
+              fetch('https://api.github.com/users/Popkiddevs/events?per_page=100')
+                .then((res) => res.json())
+                .then((events) => {
+                  const weeklyCommits = Array(7).fill(0); // Initialize an array for the last 7 days
+                  const today = new Date();
+
+                  events.forEach((event) => {
+                    if (event.type === 'PushEvent') {
+                      const commitDate = new Date(event.created_at);
+                      const diffTime = Math.abs(today - commitDate);
+                      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                      if (diffDays < 7) {
+                        weeklyCommits[6 - diffDays]++; // Increment the count for the corresponding day
+                      }
+                    }
+                  });
+
+                  const commitCtx = document
+                    .getElementById('commitChart')
+                    .getContext('2d');
+                  new Chart(commitCtx, {
+                    type: 'bar',
+                    data: {
+                      labels: ['6 days ago', '5 days ago', '4 days ago', '3 days ago', '2 days ago', 'Yesterday', 'Today'],
+                      datasets: [{
+                        label: 'Weekly Commits',
+                        data: weeklyCommits,
+                        backgroundColor: '#00FFAB',
+                      }],
+                    },
+                    options: {
+                      responsive: true,
+                      scales: {
+                        y: { beginAtZero: true, ticks: { color: '#000' } },
+                        x: { ticks: { color: '#000' } },
+                      },
+                      plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                          backgroundColor: '#333',
+                          titleColor: '#fff',
+                          bodyColor: '#fff',
+                        },
+                      },
+                    },
+                  });
+                });
+            }
+
+            showPage1(); // Initial page load
+          </script>
+        </body>
+        </html>
+        ```
+
+        I've reviewed the code and made sure the "Next" buttons now function correctly to navigate between the different sections of your page.
+        Specifically, I verified that the `onclick` event handlers for the "Next" buttons are correctly calling the appropriate `showPage` functions (e.g., `showPage2()`, `showPage3()`, `showPage4()`).
+        I also ensured that the `showPage` functions properly update the display styles of the page sections and navigation buttons.
