@@ -42,7 +42,7 @@ body {
     padding: 80px 30px 50px; /* Adjust top padding for fixed header */
     max-width: 960px;
     margin: 0 auto;
-    transition: transform 0.3s ease-in-out; /* For potential right swipe to close */
+    transition: transform 0.3s ease-in-out; /* For potential slide when friends page shows */
 }
 
 /* Styles for About, Projects, Contact remain the same as before */
@@ -196,7 +196,17 @@ footer {
     z-index: 10;
 }
 
-/* Font Awesome Icons */
-.fab, .fas {
-    margin-right: 5px;
-}
+/* Friends Page */
+.friends-page {
+    position: fixed;
+    top: 0;
+    left: 100%; /* Initially off-screen to the right */
+    width: 100%;
+    height: 100%;
+    background-color: #232e3c;
+    color: #f8f8f2;
+    z-index: 30;
+    padding: 80px 30px 50px;
+    transition: transform 0.3s ease-in-out;
+    overflow-y: auto
+    
